@@ -14,6 +14,9 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
+  },
+  { path: 'crear-geolocalizacion',
+    loadChildren: './crear-geolocalizacion/crear-geolocalizacion.module#CrearGeolocalizacionPageModule' 
   }
 ];
 
