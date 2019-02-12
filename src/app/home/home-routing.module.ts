@@ -25,6 +25,10 @@ const routes: Routes = [
         }
       ]
     },
+    {
+        path: '',
+        redirectTo: '/tabs/(one:one)'
+    }
   ];
   
   @NgModule({

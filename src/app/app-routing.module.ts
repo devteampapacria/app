@@ -14,7 +14,16 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
-  }
+  },
+  { path: 'home/crear',
+    loadChildren: './crear-geolocalizacion/crear-geolocalizacion.module#CrearGeolocalizacionPageModule' 
+  },
+  { path: 'home/mapa',
+    loadChildren: './mapa/mapa.module#MapaPageModule' 
+  },
+  { path: 'home/noticias',
+    loadChildren: './noticias/noticias.module#NoticiasPageModule' 
+  },
 ];
 
 @NgModule({
