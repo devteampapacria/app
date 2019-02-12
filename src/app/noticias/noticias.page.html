@@ -5,5 +5,25 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-item *ngFor="let noticia of noticias">
+    
+    
+    <ion-card>
+      <ion-card-header>
+        <ion-thumbnail>
+          <img [src]="noticia.img">
+        </ion-thumbnail>
+        <ion-card-title>{{noticia.titulo}}</ion-card-title>
+        <ion-card-subtitle>{{noticia.descripcion}}</ion-card-subtitle>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-button>
+          <ion-icon name="add"> 
 
+          </ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
 </ion-content>
