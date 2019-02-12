@@ -7,19 +7,17 @@ import { IonicModule } from '@ionic/angular';
 
 import { CrearGeolocalizacionPage } from './crear-geolocalizacion.page';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: CrearGeolocalizacionPage
-  }
-];
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild([
+      {
+        path: '',
+        component: CrearGeolocalizacionPage
+      }
+    ])
   ],
   declarations: [CrearGeolocalizacionPage]
 })
