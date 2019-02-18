@@ -11,18 +11,26 @@
   <ion-grid>
     <ion-row>
       <ion-col text-center>
-          <img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.redbull.com%2Frbcom%2F052%2F2017-07-20%2F2451a45c-3d4c-4f5d-9d53-7a18a7a54a73%2F0010%2F1%2F1265%2F843%2F1%2Fgopro-imagen.png&f=1">
+
+        <div class="addImageButton" text-center (click)="takePicture()">
+          <img [src]="currentImage" *ngIf="currentImage">
+          <ion-icon name="add"></ion-icon>
+        </div>
       </ion-col>
       <ion-col text-center>
-          <ion-button>
-              <ion-icon name="add"></ion-icon>
-          </ion-button>
+        <div class="addImageButton" text-center>
+          <ion-icon name="add"></ion-icon>
+        </div>
       </ion-col>
       <ion-col text-center>
-          <img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.redbull.com%2Frbcom%2F052%2F2017-07-20%2F2451a45c-3d4c-4f5d-9d53-7a18a7a54a73%2F0010%2F1%2F1265%2F843%2F1%2Fgopro-imagen.png&f=1">
+        <div class="addImageButton" text-center>
+          <ion-icon name="add"></ion-icon>
+        </div>
       </ion-col>
       <ion-col text-center>
-          <img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fimage.redbull.com%2Frbcom%2F052%2F2017-07-20%2F2451a45c-3d4c-4f5d-9d53-7a18a7a54a73%2F0010%2F1%2F1265%2F843%2F1%2Fgopro-imagen.png&f=1">
+        <div class="addImageButton" text-center>
+          <ion-icon name="add"></ion-icon>
+        </div>
       </ion-col>
     </ion-row>
     <ion-row>
