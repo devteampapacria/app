@@ -5,48 +5,46 @@
     </ion-buttons>
     <ion-title>Crear Geolocalizacion</ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col text-center>
-
-        <div class="addImageButton" text-center (click)="takePicture()">
-          <img [src]="currentImage" *ngIf="currentImage">
+      <ion-col *ngFor="let image of images; let i = index">
+        <div class="addImageButton" text-center (click)="takePicture()" *ngIf="!image">
           <ion-icon name="add"></ion-icon>
         </div>
-      </ion-col>
-      <ion-col text-center>
-        <div class="addImageButton" text-center>
-          <ion-icon name="add"></ion-icon>
+        <div class="addImageButton" text-center *ngIf="image">
+          <img [src]="image">
+          <ion-icon class="deleteImage" name="close-circle" (click)="deletePicture(i)"></ion-icon>
         </div>
-      </ion-col>
-      <ion-col text-center>
-        <div class="addImageButton" text-center>
-          <ion-icon name="add"></ion-icon>
-        </div>
-      </ion-col>
-      <ion-col text-center>
-        <div class="addImageButton" text-center>
-          <ion-icon name="add"></ion-icon>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label position="stacked">Título</ion-label>
-          <ion-textarea placeholder="Enter more information here..."></ion-textarea>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button>
-          enviar
-        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            Latitud
+          </ion-label>
+          <ion-input value="{{latitud}}" disabled></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-label>
+            Longitud
+          </ion-label>
+          <ion-input value="{{longitud}}" disabled></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item>
+    <ion-label class="descriptionTitle" position="stacked">Descripción</ion-label>
+    <ion-textarea autosize placeholder="Introduce más información acerca de las fotos..." autosize></ion-textarea>
+  </ion-item>
+  <ion-button (click)="createGeolocation()">
+    <ion-icon slot="end" name="send"></ion-icon>
+  </ion-button>
 </ion-content>
