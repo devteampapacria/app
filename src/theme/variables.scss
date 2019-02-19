@@ -4,7 +4,7 @@
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #339b3b;  //#3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -90,9 +90,13 @@
         display:flex;
         flex-direction: column;
         justify-content: space-between;
+        font-size: 13px;
+        font-weight: bold;
     }
     .card img {
         border-radius: 5px;
+        width: 100px;
+        height: 100px;
         
     }
 
@@ -100,9 +104,11 @@
         padding: 5px;
         display:flex;
         flex-direction: row-reverse;
+        font-size: 13px;
     }
 
     .card >div >div span {
-        font-size: 13px;
+        font-size: 10px;
+        opacity: 0.5;
     }
 }

@@ -14,16 +14,30 @@
         <img [src]="noticia.img">
         <div>
 			<div>
-				<span>Creado el {{noticia.created_at}}</span>
-			</div>
-          	<h4>{{noticia.titulo}}</h4>
-			<p>{{noticia.descripcion}}</p>
+				<span>{{noticia.created_at}}</span>
+      </div>
+      <div>
+        <p>{{noticia.titulo}}</p>
+      </div>
 			<div>
 				<ion-button>
-					ver noticia
+          ver
 				</ion-button>
 			</div>
         </div>
     </div>
   </ion-item>
+
+  <ion-button (click)="toggleInfiniteScroll()" expand="block">
+    Toggle Infinite Scroll
+  </ion-button>
+
+  <ion-list></ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
