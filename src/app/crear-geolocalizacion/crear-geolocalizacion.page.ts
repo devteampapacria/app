@@ -30,17 +30,14 @@ export class CrearGeolocalizacionPage implements OnInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
-
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   takePicture() {
     this.isLoading = true;
     const options: CameraOptions = {
-      quality: 100,
+      quality: 20,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -55,10 +52,9 @@ export class CrearGeolocalizacionPage implements OnInit {
         }
       });
       if (!this.space) {
-        alert('Foto añadida correctamente');
         this.space = false;
       } else {
-        alert('Limite de imagenes por punto alcanzado')
+        alert('Limite de imagenes por geolocalización alcanzado')
       }
     }, (err) => {
       console.log("Camera issue:" + err);
@@ -78,32 +74,25 @@ export class CrearGeolocalizacionPage implements OnInit {
 
     if (this.images[0] != null) {
       this.isLoading = true;
-    let acceptedImages = [];
-    this.images.forEach((element, index) => {
-      if (this.images[index]) {
-        acceptedImages.push(this.images[index]);
+      let acceptedImages = [];
+      let punto = {
+        "latitud": this.latitud,
+        "longitud": this.longitud,
+        "descripcion": descriptArea,
+        "imagenes": this.images,
+        "recogido": 0,
       }
-    });
-    let punto = {
-      "latitud": this.latitud,
-      "longitud": this.longitud,
-      "descripcion": descriptArea,
-      "file": acceptedImages,
-      "recogido": 0,
-    }
 
-    this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/crearPunto", punto, {headers: new HttpHeaders({ 'Content-Type': 'application/json' })})
-      .subscribe(data => {
-        this.isLoading = false;
-        console.log(data);
-        this.router.navigateByUrl('/geolocalizacion-creada');
-      }, error => {
-        console.log(error);
-      });
+      this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/crearPunto", punto, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json' }) })
+        .subscribe(data => {
+          this.isLoading = false;
+          this.router.navigateByUrl('/geolocalizacion-creada');
+        }, error => {
+          alert('error');
+          this.isLoading = false;
+        });
     } else {
       alert('No sacado ninguna foto');
     }
   }
-
-  
 }
