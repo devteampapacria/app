@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { HTTP } from '@ionic-native/http/ngx';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-geolocalizacion',
@@ -14,8 +15,9 @@ export class CrearGeolocalizacionPage implements OnInit {
   space = false;
   latitud = 1;
   longitud = 1;
+  isLoading = false;
 
-  constructor(private camera: Camera, private geolocation: Geolocation, private http: HTTP) {
+  constructor(private router: Router, private http: HttpClient, private camera: Camera, private geolocation: Geolocation) {
     var options = {
       enableHighAccuracy: true,
       timeout: 2000,
@@ -28,6 +30,7 @@ export class CrearGeolocalizacionPage implements OnInit {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+
   }
 
   ngOnInit() {
@@ -35,6 +38,7 @@ export class CrearGeolocalizacionPage implements OnInit {
   }
 
   takePicture() {
+    this.isLoading = true;
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -54,11 +58,12 @@ export class CrearGeolocalizacionPage implements OnInit {
         alert('Foto añadida correctamente');
         this.space = false;
       } else {
-        alert('mi ninio que no queda espacio, gilipollas')
+        alert('Limite de imagenes por punto alcanzado')
       }
     }, (err) => {
       console.log("Camera issue:" + err);
     });
+    this.isLoading = false;
   }
 
   deletePicture(index) {
@@ -69,14 +74,36 @@ export class CrearGeolocalizacionPage implements OnInit {
     }
   }
 
-  createGeolocation() {
-    this.http.get('url', {}, {})
-      .then(data => {
-        console.log(data.data); // data received by server
+  createGeolocation(descriptArea: string) {
 
-      })
-      .catch(error => {
-        console.log(error.error); // error message as string
+    if (this.images[0] != null) {
+      this.isLoading = true;
+    let acceptedImages = [];
+    this.images.forEach((element, index) => {
+      if (this.images[index]) {
+        acceptedImages.push(this.images[index]);
+      }
+    });
+    let punto = {
+      "latitud": this.latitud,
+      "longitud": this.longitud,
+      "descripcion": descriptArea,
+      "file": acceptedImages,
+      "recogido": 0,
+    }
+
+    this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/crearPunto", punto, {headers: new HttpHeaders({ 'Content-Type': 'application/json' })})
+      .subscribe(data => {
+        this.isLoading = false;
+        console.log(data);
+        this.router.navigateByUrl('/geolocalizacion-creada');
+      }, error => {
+        console.log(error);
       });
+    } else {
+      alert('No sacado ninguna foto');
+    }
   }
+
+  
 }
