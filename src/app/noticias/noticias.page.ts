@@ -18,7 +18,7 @@ export class NoticiasPage implements OnInit {
   //indice de noticias que llevamos
   i = 0;
   constructor(private http: HttpClient) {
-    this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?pageSize=2&page=1').subscribe((response) => {
+    this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias').subscribe((response) => {
       console.log(response);
       this.todas = response;
       //por defecto ponemos el limite de noticias
