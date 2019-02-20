@@ -13,10 +13,8 @@ export class NoticiasPage implements OnInit {
     private noticias = new Array;
     //aqui todas las noticias
     private todas;
-    //el numero de noticias que quiero mostrar
-    limite = 3;
     //indice de noticias que llevamos
-    i = 0;
+    i = 1;
 
     constructor(private http: HttpClient) {
         this.doRefresh(event);
@@ -24,34 +22,37 @@ export class NoticiasPage implements OnInit {
     //cuando se llame al evento de loaddata
     loadData(event) {
         setTimeout(() => {
-            //incrementamos el limite en 3
-            this.limite = this.limite + 3;
-            //y recorremos hasta encontrar el limite
-            for (this.i; this.i < this.limite; this.i++) {
-                //en caso de que ya no queden pues sencillamente desactivo el evento y paro el bucle
-                if (this.todas[this.i] == undefined) {
+            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?page='+this.i).subscribe((response) => {
+                this.todas = response;
+                if (this.todas.data==[]) {
                     event.target.complete();
-                    break;
+                    return;
                 }
-                this.noticias.push(this.todas[this.i]);
-            }
-        }, 1000);
+                
+                //por defecto ponemos el limite de noticias
+                this.todas.data.forEach(element => {
+                    this.noticias.push(element);
+                });
+                this.i++;
+                event.target.complete();
+                
+            })
+        }, 100);
     }
     doRefresh(event) {
         setTimeout(() => {
             this.noticias = new Array;
-            this.i = 0;
-            this.limite = 3;
-            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias').subscribe((response) => {
+            this.i = 1;
+            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?page='+this.i).subscribe((response) => {
                 this.todas = response;
                 //por defecto ponemos el limite de noticias
-                for (this.i; this.i < this.limite; this.i++) {
-                    this.noticias.push(this.todas[this.i]);
-                }
+                this.todas.data.forEach(element => {
+                    this.noticias.push(element);
+                });
+                this.i++;
                 event.target.complete();
-
-            })
-        }, 1000);
+            });
+        }, 100);
 
 
     }
