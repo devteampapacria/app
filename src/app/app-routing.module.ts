@@ -26,7 +26,8 @@ const routes: Routes = [
   },
   { path: 'geolocalizacion-creada',
    loadChildren: './geolocalizacion-creada/geolocalizacion-creada.module#GeolocalizacionCreadaPageModule'
-  }
+  },  { path: 'first-time-slide', loadChildren: './first-time-slide/first-time-slide.module#FirstTimeSlidePageModule' }
+
 ];
 
 @NgModule({
