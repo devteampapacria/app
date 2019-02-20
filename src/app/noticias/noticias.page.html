@@ -1,47 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button defaultHref="home"></ion-back-button>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
         </ion-buttons>
-    <ion-title>noticias</ion-title>
-  </ion-toolbar>
+        <ion-title>noticias</ion-title>
+    </ion-toolbar>
 </ion-header>
 <ion-content padding>
-    
+
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content
-          pullingIcon="arrow-dropdown"
-          pullingText="Pull to refresh"
-          refreshingSpinner="circles"
-          refreshingText="Refreshing...">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+            refreshingText="Refreshing...">
         </ion-refresher-content>
-      </ion-refresher>
-  <ion-item *ngFor="let noticia of noticias">
-    
-    <div class="card">
-        <img [src]="noticia.img">
-        <div>
-			<div>
-				<span>{{noticia.created_at}}</span>
-      </div>
-      <div>
-        <p>{{noticia.titulo}}</p>
-      </div>
-			<div>
-				<ion-button>
-          ver
-				</ion-button>
-			</div>
+    </ion-refresher>
+    <ion-item *ngFor="let noticia of noticias">
+
+        <div class="card">
+            <img [src]="noticia.img">
+            <div>
+                <div>
+                    <span>{{noticia.created_at}}</span>
+                </div>
+                <div>
+                    <p>{{noticia.titulo}}</p>
+                </div>
+                <div>
+                    <ion-button href="/home/noticia/{{noticia.id}}">
+                        ver
+                    </ion-button>
+                </div>
+            </div>
         </div>
-    </div>
-  </ion-item>
-
-  <ion-list></ion-list>
-
-  <ion-infinite-scroll (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+    </ion-item>
+    <ion-infinite-scroll (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

@@ -24,6 +24,8 @@ const routes: Routes = [
   { path: 'home/noticias',
     loadChildren: './noticias/noticias.module#NoticiasPageModule' 
   },
+  { path: 'home/noticia/:noticia_id', loadChildren: './noticia/noticia.module#NoticiaPageModule' },
+
 ];
 
 @NgModule({

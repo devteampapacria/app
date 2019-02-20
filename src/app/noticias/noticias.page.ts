@@ -53,10 +53,7 @@ export class NoticiasPage implements OnInit {
                 event.target.complete();
             });
         }, 100);
-
-
     }
-
     ngOnInit() {
     }
 
