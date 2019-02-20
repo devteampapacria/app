@@ -4,6 +4,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+/// <reference path="./types/MicrosoftMaps/Microsoft.Maps.All.d.ts"/>
+
 @Component({
   selector: 'app-crear-geolocalizacion',
   templateUrl: './crear-geolocalizacion.page.html',

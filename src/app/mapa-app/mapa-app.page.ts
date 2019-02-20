@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from "ionic-angular";
-import { Subscription } from "rxjs";
-import { finalize } from "rxjs/operators";
 import { Geolocation } from "@ionic-native/geolocation/ngx";
+import { HttpClient } from '@angular/common/http';
+
+/// <reference path="./types/MicrosoftMaps/Microsoft.Maps.All.d.ts"/>
 
 @Component({
   selector: 'app-mapa-app',
@@ -17,95 +17,50 @@ export class MapaAppPage implements OnInit {
   addressExists = false;
   latitude;
   longitude;
+  puntos;
 
   ngOnInit() {
   }
 
-  constructor(public geolocation: Geolocation) {
+  constructor(public geolocation: Geolocation, private http: HttpClient) {
     var options = {
       enableHighAccuracy: true,
       timeout: 2000,
       maximumAge: 0
     };
-    // Load the map
+
     this.load().then(() => {
       console.log("Maps loaded");
 
-      // Request user's location
       this.geolocation.getCurrentPosition(options).then((resp) => {
-          // resp.coords.latitude
-          // resp.coords.longitude
-          console.log(resp);
-
-          // Change map's view to match user's location
-          this.map = new Microsoft.Maps.Map(document.getElementById("myMap"), {
-            center: new Microsoft.Maps.Location(
-              23.284,
-              17.548
-            ),
-            zoom: 12
-          });
-
-          // Attach Autosuggest
-          Microsoft.Maps.loadModule("Microsoft.Maps.AutoSuggest", () => {
-            var options = {
-              maxResults: 4,
-              map: this.map
-            };
-            var manager = new Microsoft.Maps.AutosuggestManager(options);
-            manager.attachAutosuggest(
-              "#searchBox",
-              "#searchBoxContainer",
-              result => {
-                this.addressEntered = true;
-                this.map.entities.clear();
-
-                this.map.setView({ bounds: result.bestView });
-                var pushpin = new Microsoft.Maps.Pushpin(result.location);
-                this.map.entities.push(pushpin);
-                this.address = result.formattedSuggestion;
-                this.latitude = result.location.latitude;
-                this.longitude = result.location.longitude;
-              }
-            );
-          });
-        })
+        this.map = new Microsoft.Maps.Map(document.getElementById("myMap"), {
+          center: new Microsoft.Maps.Location(
+            resp.coords.latitude,
+            resp.coords.longitude
+          ),
+          zoom: 6
+        });
+        this.addPoints();
+      })
         .catch((error) => {
-
-          // User denied permission to his location, so show default location
-
-          console.log("Error getting location", error);
           this.map = new Microsoft.Maps.Map(document.getElementById("myMap"), {
-            center: new Microsoft.Maps.Location(39.9612, -82.9988),
+            center: new Microsoft.Maps.Location(29.011036199999996, -13.5494869),
             zoom: 12
           });
-          Microsoft.Maps.loadModule("Microsoft.Maps.AutoSuggest", () => {
-            var options = {
-              maxResults: 4,
-              map: this.map
-            };
-            var manager = new Microsoft.Maps.AutosuggestManager(options);
-            manager.attachAutosuggest(
-              "#searchBox",
-              "#searchBoxContainer",
-              result => {
-                this.addressEntered = true;
-                this.map.entities.clear();
-
-                this.map.setView({ bounds: result.bestView });
-                var pushpin = new Microsoft.Maps.Pushpin(result.location);
-                this.map.entities.push(pushpin);
-                this.address = result.formattedSuggestion;
-                this.latitude = result.location.latitude;
-                this.longitude = result.location.longitude;
-              }
-            );
-          });
+          this.addPoints();
         });
     });
   }
 
-  // Load the map and return a promise
+  addPoints() {
+    this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/puntos').subscribe((response) => {
+      this.puntos = response;
+      for (let i = 0; i < this.puntos.length; i++) {
+        this.map.entities.push(new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(response[i].latitud, response[i].longitud)));
+      }
+    })
+  }
+
   load(): Promise<void> {
     if (this.loadPromise) {
       return this.loadPromise;
@@ -118,7 +73,7 @@ export class MapaAppPage implements OnInit {
 
     let mapsCallback = "bingMapsCallback";
     // Replace YOUR_BING_MAPS_API_KEY with your API key
-    script.src = `https://www.bing.com/api/maps/mapcontrol?key=YOUR_BING_MAPS_API_KEY&callback=bingMapsCallback`;
+    script.src = `https://www.bing.com/api/maps/mapcontrol?key=AiPNpJbR0CHbSbndZwKAnwUeX2kGc8dW0zICvtGlDjQKS3yoham-zKL7iQsCHLss&callback=bingMapsCallback`;
 
     this.loadPromise = new Promise<void>(
       (resolve: Function, reject: Function) => {

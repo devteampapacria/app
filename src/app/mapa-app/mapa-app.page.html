@@ -1,18 +1,12 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
     <ion-title>mapaApp</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <div>
-    <h6 margin-top>Enter Address</h6>
-    <div id='searchBoxContainer'>
-      <input class="text-input text-input-md" id="searchBox" [(ngModel)]="address" placeholder="Address (Optional)">
-    </div>
-
-    <div id='myMap' style='width: 100%; height: 24rem;'></div>
-
-    <button (click)="createPost()" margin-top ion-button block>Submit</button>
-</div>
+<ion-content>
+  <div id='myMap' style='width: 100%; height: 100%;'></div>
 </ion-content>
