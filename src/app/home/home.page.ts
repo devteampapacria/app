@@ -12,7 +12,7 @@ export class HomePage {
 
     if (localStorage.getItem['firstTimeLoad'] != 'TRUE') {
       /* localStorage.setItem('firstTimeLoad', 'TRUE'); */
-      this.router.navigateByUrl('/first-time-slide');
+      this.router.navigateByUrl('/mapa-app');
     }
 
   }
