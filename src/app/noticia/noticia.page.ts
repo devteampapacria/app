@@ -10,10 +10,12 @@ import { HttpClient } from '@angular/common/http';
 export class NoticiaPage implements OnInit {
     private id;
     private noticia;
+    private contenido: string = "";
     constructor(private route: ActivatedRoute, private http: HttpClient) {
         this.id = this.route.snapshot.paramMap.get('noticia_id');
         this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticia/' + this.id).subscribe((response) => {
             this.noticia = response;
+            this.contenido = this.noticia.contenido;
         })
     }
 
