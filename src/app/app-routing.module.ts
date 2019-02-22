@@ -26,8 +26,10 @@ const routes: Routes = [
   },
   { path: 'geolocalizacion-creada',
    loadChildren: './geolocalizacion-creada/geolocalizacion-creada.module#GeolocalizacionCreadaPageModule'
-  },  { path: 'first-time-slide', loadChildren: './first-time-slide/first-time-slide.module#FirstTimeSlidePageModule' },
-  { path: 'mapa-app', loadChildren: './mapa-app/mapa-app.module#MapaAppPageModule' }
+  },
+  { path: 'first-time-slide', loadChildren: './first-time-slide/first-time-slide.module#FirstTimeSlidePageModule' },
+  { path: 'mapa-app', loadChildren: './mapa-app/mapa-app.module#MapaAppPageModule' },
+  { path: 'geolocalizacion/:id', loadChildren: './geolocalizacion/geolocalizacion.module#GeolocalizacionPageModule' }
 
 ];
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 /// <reference path="./types/MicrosoftMaps/Microsoft.Maps.All.d.ts"/>
 
@@ -22,7 +23,7 @@ export class MapaAppPage implements OnInit {
   ngOnInit() {
   }
 
-  constructor(public geolocation: Geolocation, private http: HttpClient) {
+  constructor(public router: Router, public geolocation: Geolocation, public http: HttpClient) {
     var options = {
       enableHighAccuracy: true,
       timeout: 2000,
@@ -56,11 +57,20 @@ export class MapaAppPage implements OnInit {
     this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/puntos').subscribe((response) => {
       this.puntos = response;
       for (let i = 0; i < this.puntos.length; i++) {
-        this.map.entities.push(new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(response[i].latitud, response[i].longitud)));
+        let pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(response[i].latitud, response[i].longitud),{
+          icon: (response[i].recogido != 0 ? './assets/dot_picked_rescaled.png' : './assets/dot_not_picked_rescaled.png'),
+        })
+        pin.metadata = {id: response[i].id};
+        this.map.entities.push(pin);
+        Microsoft.Maps.Events.addHandler(pin, 'click', function(e){this.router.navigateByUrl('/home');}); 
       }
     })
   }
 
+  pinClicked(e) {
+    
+  }
+  
   load(): Promise<void> {
     if (this.loadPromise) {
       return this.loadPromise;
