@@ -10,14 +10,14 @@ import { ImageModalPage } from '../image-modal/image-modal.page';
   styleUrls: ['./geolocalizacion.page.scss'],
 })
 export class GeolocalizacionPage implements OnInit {
-  private id;
-  private latitud;
-  private longitud;
-  private descripcion;
-  private user;
-  private score;
-  private f_creacion;
-  private images : any;
+  id;
+  latitud;
+  longitud;
+  descripcion;
+  user;
+  score;
+  f_creacion;
+  images : any;
   isLoading = false;
 
   sliderOpts = {
@@ -30,13 +30,11 @@ export class GeolocalizacionPage implements OnInit {
   constructor(private modalController: ModalController, private route: ActivatedRoute, public http: HttpClient) {}
 
   ngOnInit() {
-    this.id = 515;
-    //this.id = this.route.snapshot.paramMap.get('id');
+    this.id = this.route.snapshot.paramMap.get('id');
     this.getInfo();
   }
 
   openPreview(index, referer) {
-    console.log(index + ',' + referer)
     this.modalController.create({
       component: ImageModalPage,
       componentProps: {
@@ -50,7 +48,7 @@ export class GeolocalizacionPage implements OnInit {
 
   getInfo() {
     this.isLoading = true;
-    this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/infoPunto/' + 515).subscribe((response) => {
+    this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/infoPunto/' + this.id).subscribe((response) => {
       let datos = Object(response);
       this.latitud = datos.latitud;
       this.longitud = datos.longitud;
@@ -63,12 +61,11 @@ export class GeolocalizacionPage implements OnInit {
   }
 
   getImgs() {
-    this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/imgPunto/' + 515).subscribe((response) => {
+    this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/imgPunto/' + this.id).subscribe((response) => {
      this.images = response;
       for (let i = 0; i < this.images.length; i++) {
         this.images[i].loaded = false;
       }
-      console.log(this.images)
     })
     this.isLoading = false;
   }

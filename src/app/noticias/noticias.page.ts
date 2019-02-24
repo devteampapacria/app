@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./noticias.page.scss'],
 })
 export class NoticiasPage implements OnInit {
-  private noticias;
+  noticias;
   constructor(private http: HttpClient) {
     this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias').subscribe((response) => {
       console.log(response);

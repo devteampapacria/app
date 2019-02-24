@@ -5,8 +5,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Platform } from "@ionic/angular";
 
-
-
 @Component({
   selector: 'app-crear-geolocalizacion',
   templateUrl: './crear-geolocalizacion.page.html',
@@ -19,6 +17,7 @@ export class CrearGeolocalizacionPage implements OnInit {
   latitud = 1;
   longitud = 1;
   isLoading = false;
+  descriptArea;
 
   constructor(private platform: Platform, private router: Router, private http: HttpClient, private camera: Camera, private geolocation: Geolocation) {
     var options = {
@@ -33,8 +32,7 @@ export class CrearGeolocalizacionPage implements OnInit {
         this.latitud = resp.coords.latitude;
         this.longitud = resp.coords.longitude;
       }).catch((error) => {
-        let error2 = error.toString();
-        alert(error2);
+        alert(error.message);
       });
 
     });
@@ -89,7 +87,7 @@ export class CrearGeolocalizacionPage implements OnInit {
       let punto = {
         "latitud": this.latitud,
         "longitud": this.longitud,
-        "descripcion": descriptArea,
+        "descripcion": this.descriptArea,
         "imagenes": this.images,
         "recogido": 0,
       }

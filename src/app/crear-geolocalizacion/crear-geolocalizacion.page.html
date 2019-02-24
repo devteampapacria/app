@@ -43,9 +43,9 @@
   </ion-item>
   <ion-item padding>
     <ion-label class="descriptionTitle" position="stacked">Descripción</ion-label>
-    <ion-textarea name="description" [(ngModel)]="descripArea" autosize placeholder="Introduce más información acerca de las fotos..."></ion-textarea>
+    <ion-textarea name="description" [(ngModel)]="descriptArea" autosize placeholder="Introduce más información acerca de las fotos..."></ion-textarea>
   </ion-item>
-  <ion-button (click)="createGeolocation(descripArea)" padding>
+  <ion-button (click)="createGeolocation(descriptArea)" padding>
     <ion-icon slot="end" name="send"></ion-icon>
   </ion-button>
 </ion-content>
