@@ -1,0 +1,38 @@
+.images {
+    
+    width: 100%;
+}
+
+.images img {
+    filter: drop-shadow(0 0 0.35rem #94f6b8);
+}
+
+ion-icon {
+    color: gold;
+    font-size: 30px;
+}
+
+ .geolocalizacion_container {
+    padding: 20px;
+}
+
+hr {
+    border: 0; height: 1px; background: #333; background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+.descripcion {
+    margin-top: 18px;
+    margin-left: 18px;
+    line-height: 1.3em;
+}
+
+.user {
+    margin-top: 18px;
+}
+
+ion-slides {
+    img {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}

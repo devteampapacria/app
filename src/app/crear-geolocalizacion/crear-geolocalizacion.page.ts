@@ -3,8 +3,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Platform } from "@ionic/angular";
 
-/// <reference path="./types/MicrosoftMaps/Microsoft.Maps.All.d.ts"/>
+
 
 @Component({
   selector: 'app-crear-geolocalizacion',
@@ -19,22 +20,30 @@ export class CrearGeolocalizacionPage implements OnInit {
   longitud = 1;
   isLoading = false;
 
-  constructor(private router: Router, private http: HttpClient, private camera: Camera, private geolocation: Geolocation) {
+  constructor(private platform: Platform, private router: Router, private http: HttpClient, private camera: Camera, private geolocation: Geolocation) {
     var options = {
       enableHighAccuracy: true,
-      timeout: 2000,
-      maximumAge: 0
+      timeout: 60000,
+      maximumAge: 30000
     };
 
-    this.geolocation.getCurrentPosition(options).then((resp) => {
-      this.latitud = resp.coords.latitude;
-      this.longitud = resp.coords.longitude;
-    }).catch((error) => {
-      console.log('Error getting location', error);
+    
+    this.platform.ready().then(() => {
+      this.geolocation.getCurrentPosition(options).then((resp) => {
+        this.latitud = resp.coords.latitude;
+        this.longitud = resp.coords.longitude;
+      }).catch((error) => {
+        let error2 = error.toString();
+        alert(error2);
+      });
+
     });
+    
   }
 
   ngOnInit() {}
+
+  
 
   takePicture() {
     this.isLoading = true;

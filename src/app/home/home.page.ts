@@ -10,16 +10,16 @@ import { Router } from '@angular/router';
 export class HomePage {
   constructor(private router: Router, private iab: InAppBrowser) {
 
-    if (localStorage.getItem['firstTimeLoad'] != 'TRUE') {
-      /* localStorage.setItem('firstTimeLoad', 'TRUE'); */
+    /* if (localStorage.getItem['firstTimeLoad'] != 'TRUE') {
+      localStorage.setItem('firstTimeLoad', 'TRUE');
       this.router.navigateByUrl('/mapa-app');
-    }
+    } */
 
   }
-  isLoading = false;
+  /* isLoading = false;
 
   openWebpage(url: string) {
     this.isLoading = true;
     const browser = this.iab.create(url, '_self');
-  }
+  } */
 }

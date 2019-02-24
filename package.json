@@ -22,6 +22,7 @@
     "@angular/router": "^7.2.2",
     "@ionic-native/camera": "^5.0.0",
     "@ionic-native/core": "^5.0.0",
+    "@ionic-native/file": "^5.2.0",
     "@ionic-native/geolocation": "^5.1.0",
     "@ionic-native/http": "^5.1.0",
     "@ionic-native/in-app-browser": "^5.1.0",
@@ -86,7 +87,8 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-advanced-http": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-file": {}
     },
     "platforms": [
       "ios",

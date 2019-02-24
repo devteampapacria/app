@@ -10,7 +10,7 @@
 
 <ion-content>
   <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
-  <ion-grid padding>
+  <ion-grid>
     <ion-row>
       <ion-col *ngFor="let image of images; let i = index">
         <div class="addImageButton" text-center (click)="takePicture()" *ngIf="!image">

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Platform } from "@ionic/angular";
 
 /// <reference path="./types/MicrosoftMaps/Microsoft.Maps.All.d.ts"/>
 
@@ -11,45 +12,56 @@ import { Router } from '@angular/router';
   styleUrls: ['./mapa-app.page.scss'],
 })
 export class MapaAppPage implements OnInit {
-  address: string;
   map;
   loadPromise: Promise<void>;
-  addressEntered = false;
-  addressExists = false;
   latitude;
   longitude;
   puntos;
+  pinClicked;
 
   ngOnInit() {
   }
 
-  constructor(public router: Router, public geolocation: Geolocation, public http: HttpClient) {
+  constructor(private platform: Platform, public router: Router, public geolocation: Geolocation, public http: HttpClient) {
     var options = {
       enableHighAccuracy: true,
-      timeout: 2000,
-      maximumAge: 0
+      timeout: 60000,
+      maximumAge: 30000
     };
 
-    this.load().then(() => {
-      console.log("Maps loaded");
+    this.platform.ready().then(() => {
+      this.load().then(() => {
+        console.log("Maps loaded");
 
-      this.geolocation.getCurrentPosition(options).then((resp) => {
-        this.map = new Microsoft.Maps.Map(document.getElementById("myMap"), {
-          center: new Microsoft.Maps.Location(
-            resp.coords.latitude,
-            resp.coords.longitude
-          ),
-          zoom: 6
-        });
-        this.addPoints();
-      })
-        .catch((error) => {
+        this.geolocation.getCurrentPosition(options).then((resp) => {
           this.map = new Microsoft.Maps.Map(document.getElementById("myMap"), {
-            center: new Microsoft.Maps.Location(29.011036199999996, -13.5494869),
-            zoom: 12
+            center: new Microsoft.Maps.Location(
+              resp.coords.latitude,
+              resp.coords.longitude
+            ),
+            zoom: 6,
           });
           this.addPoints();
-        });
+          this.changeView();
+        })
+          .catch((error) => {
+            this.map = new Microsoft.Maps.Map(document.getElementById("myMap"), {
+              center: new Microsoft.Maps.Location(29.011036199999996, -13.5494869),
+              zoom: 12
+            });
+            this.addPoints();
+          });
+      });
+    })
+
+    this.pinClicked = function (e) {
+      router.navigateByUrl('/geolocalizacion/' + e.target.metadata.id);
+    }
+  }
+
+  changeView() {
+    this.map.setView({
+      mapTypeId: Microsoft.Maps.MapTypeId.aerial
     });
   }
 
@@ -57,20 +69,16 @@ export class MapaAppPage implements OnInit {
     this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/puntos').subscribe((response) => {
       this.puntos = response;
       for (let i = 0; i < this.puntos.length; i++) {
-        let pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(response[i].latitud, response[i].longitud),{
+        let pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(response[i].latitud, response[i].longitud), {
           icon: (response[i].recogido != 0 ? './assets/dot_picked_rescaled.png' : './assets/dot_not_picked_rescaled.png'),
         })
-        pin.metadata = {id: response[i].id};
+        pin.metadata = { id: response[i].id };
         this.map.entities.push(pin);
-        Microsoft.Maps.Events.addHandler(pin, 'click', function(e){this.router.navigateByUrl('/home');}); 
+        Microsoft.Maps.Events.addHandler(pin, 'click', this.pinClicked);
       }
     })
   }
 
-  pinClicked(e) {
-    
-  }
-  
   load(): Promise<void> {
     if (this.loadPromise) {
       return this.loadPromise;

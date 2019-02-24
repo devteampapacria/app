@@ -11,6 +11,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ImageModalPageModule } from './image-modal/image-modal.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,7 +20,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    ImageModalPageModule
   ],
   providers: [
     StatusBar,
