@@ -24,7 +24,9 @@ const routes: Routes = [
   { path: 'home/noticias',
     loadChildren: './noticias/noticias.module#NoticiasPageModule' 
   },
-  { path: 'home/noticia/:noticia_id', loadChildren: './noticia/noticia.module#NoticiaPageModule' },
+  { path: 'home/noticia/:noticia_id', loadChildren: './noticia/noticia.module#NoticiaPageModule' },  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
+
 
 ];
 
