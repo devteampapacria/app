@@ -1,9 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Geolocalización {{id}}</ion-title>
+    <ion-title>Geolocalización Nº{{id}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -62,8 +62,7 @@
     <ion-row>
       <ion-col>
         <label>
-          <!-- - f_creacion.split(" ")[0] -->
-          <b>Descripción </b>
+          <b>Descripción - {{f_creacion.split(" ")[0]}}</b>
           <div class="descripcion" *ngIf="descripcion">{{descripcion}}</div>
         </label>
       </ion-col>
@@ -78,11 +77,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
-
-
-
-
-  <div *ngIf="f_creacion"></div>
 </ion-content>

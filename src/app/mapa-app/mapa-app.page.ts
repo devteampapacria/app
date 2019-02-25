@@ -18,6 +18,7 @@ export class MapaAppPage implements OnInit {
   longitude;
   puntos;
   pinClicked;
+  isLoading = false;
 
   ngOnInit() {
   }
@@ -43,6 +44,7 @@ export class MapaAppPage implements OnInit {
           });
           this.addPoints();
           this.changeView();
+          this.isLoading = false;
         })
           .catch((error) => {
             this.map = new Microsoft.Maps.Map(document.getElementById("myMap"), {
@@ -80,6 +82,7 @@ export class MapaAppPage implements OnInit {
   }
 
   load(): Promise<void> {
+    this.isLoading = true;
     if (this.loadPromise) {
       return this.loadPromise;
     }
@@ -96,7 +99,6 @@ export class MapaAppPage implements OnInit {
     this.loadPromise = new Promise<void>(
       (resolve: Function, reject: Function) => {
         window[mapsCallback] = () => {
-          console.log("inside maps callback");
           resolve();
         };
         script.onerror = (error: Event) => {
