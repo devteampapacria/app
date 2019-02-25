@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Geolocalización Nº{{id}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+  <ion-grid class="geolocalizacion_container">
+    <ion-row>
+      <ion-col text-center>
+        <ion-slides [options]="sliderOpts">
+          <ion-slide class="images" *ngFor="let image of images;let i = index">
+            <img [src]="image.resized_name" (load)="image.loaded = true" tappable (click)="openPreview(i,id)" [hidden]="!image.loaded">
+            <ion-spinner [hidden]="image.loaded"></ion-spinner>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <div *ngIf="score == 0">
+          <ion-icon name="star-outline"></ion-icon>
+          <ion-icon name="star-outline"></ion-icon>
+          <ion-icon name="star-outline"></ion-icon>
+        </div>
+        <div *ngIf="score == 1">
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star-outline"></ion-icon>
+          <ion-icon name="star-outline"></ion-icon>
+        </div>
+        <div *ngIf="score == 3">
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star-outline"></ion-icon>
+        </div>
+        <div *ngIf="score == 5">
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <label>
+          <b>Latitud</b>
+          <div *ngIf="latitud">{{latitud}}</div>
+        </label>
+      </ion-col>
+      <ion-col text-center>
+        <label>
+          <b>Longitud</b>
+          <div *ngIf="longitud">{{longitud}}</div>
+        </label>
+      </ion-col>
+    </ion-row>
+    <hr>
+    <ion-row>
+      <ion-col>
+        <label>
+          <b>Descripción - {{f_creacion.split(" ")[0]}}</b>
+          <div class="descripcion" *ngIf="descripcion">{{descripcion}}</div>
+        </label>
+      </ion-col>
+    </ion-row>
+    <hr>
+    <ion-row>
+      <ion-col text-center>
+        <label>
+          <b>Información aportada por:</b>
+        </label>
+        <div class="user" *ngIf="user"> {{user}} </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
