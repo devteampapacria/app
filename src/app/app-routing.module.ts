@@ -15,16 +15,40 @@ const routes: Routes = [
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
   },
-  { path: 'home/crear',
-    loadChildren: './crear-geolocalizacion/crear-geolocalizacion.module#CrearGeolocalizacionPageModule' 
+  {
+    path: 'home/crear',
+    loadChildren: './crear-geolocalizacion/crear-geolocalizacion.module#CrearGeolocalizacionPageModule'
   },
-  { path: 'home/mapa',
-    loadChildren: './mapa/mapa.module#MapaPageModule' 
+  {
+    path: 'home/mapa',
+    loadChildren: './mapa-app/mapa-app.module#MapaAppPageModule'
   },
-  { path: 'home/noticias',
-    loadChildren: './noticias/noticias.module#NoticiasPageModule' 
+  {
+    path: 'home/noticias',
+    loadChildren: './noticias/noticias.module#NoticiasPageModule'
+  },
+  {
+    path: 'geolocalizacion-creada',
+    loadChildren: './geolocalizacion-creada/geolocalizacion-creada.module#GeolocalizacionCreadaPageModule'
+  },
+  {
+    path: 'first-time-slide',
+    loadChildren: './first-time-slide/first-time-slide.module#FirstTimeSlidePageModule'
+  },
+  {
+    path: 'mapa-app',
+    loadChildren: './mapa-app/mapa-app.module#MapaAppPageModule'
+  },
+  {
+    path: 'geolocalizacion/:id',
+    loadChildren: './geolocalizacion/geolocalizacion.module#GeolocalizacionPageModule'
   },
   { path: 'home/noticia/:noticia_id', loadChildren: './noticia/noticia.module#NoticiaPageModule' },
+  {
+    path: 'image-modal',
+    loadChildren: './image-modal/image-modal.module#ImageModalPageModule'
+  }
+
 
 ];
 
@@ -32,4 +56,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
