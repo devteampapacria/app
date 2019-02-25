@@ -19,7 +19,7 @@ export class NoticiasPage implements OnInit {
     constructor(private http: HttpClient) {
         this.doRefresh(event);
     }
-    //cuando se llame al evento de loaddata
+    //cuando se llame al evento de loadData
     loadData(event) {
         setTimeout(() => {
             this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?page='+this.i).subscribe((response) => {
