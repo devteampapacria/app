@@ -22,20 +22,20 @@ export class NoticiasPage implements OnInit {
     //cuando se llame al evento de loaddata
     loadData(event) {
         setTimeout(() => {
-            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?page='+this.i).subscribe((response) => {
+            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?page=' + this.i).subscribe((response) => {
                 this.todas = response;
-                if (this.todas.data==[]) {
+                if (this.todas.data == []) {
                     event.target.complete();
                     return;
                 }
-                
+
                 //por defecto ponemos el limite de noticias
                 this.todas.data.forEach(element => {
                     this.noticias.push(element);
                 });
                 this.i++;
                 event.target.complete();
-                
+
             })
         }, 100);
     }
@@ -43,7 +43,7 @@ export class NoticiasPage implements OnInit {
         setTimeout(() => {
             this.noticias = new Array;
             this.i = 1;
-            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?page='+this.i).subscribe((response) => {
+            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?page=' + this.i).subscribe((response) => {
                 this.todas = response;
                 //por defecto ponemos el limite de noticias
                 this.todas.data.forEach(element => {
