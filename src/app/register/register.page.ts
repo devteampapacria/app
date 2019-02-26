@@ -7,13 +7,39 @@ import { Router } from '@angular/router';
     templateUrl: './register.page.html',
     styleUrls: ['./register.page.scss'],
     template: `
-    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-      <input name="name" ngModel required #first="ngModel">
-      <input type="email" name="email" ngModel required>
-      <input type="password" name="password" ngModel required #first="ngModel">
-      <input type="password" name="password_confirmation" ngModel required>
-      <button>Submit</button>
-    </form>
+    <ion-header>
+        <ion-toolbar>
+            <ion-title>Registrarme</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content padding>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+            <ion-item>
+                <ion-label></ion-label>
+                <ion-input placeholder="nombre" name="name" ngModel required #first="ngModel"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label></ion-label>
+                <ion-input placeholder="email" type="email" name="email" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label></ion-label>
+                <ion-input placeholder="contraseña" type="password" name="password" ngModel required #first="ngModel"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label></ion-label>
+                <ion-input placeholder="repite contraseña" type="password" name="password_confirmation" ngModel required></ion-input>
+            </ion-item>
+            <ion-button type="submit">
+                registrarme
+            </ion-button>
+        </form>
+        <br><br>
+        <a href="/login">
+            ¿Ya tienes cuenta?
+        </a>
+    </ion-content>
   `,
 })
 export class RegisterPage implements OnInit {
