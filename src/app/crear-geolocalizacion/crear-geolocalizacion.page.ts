@@ -27,7 +27,6 @@ export class CrearGeolocalizacionPage implements OnInit {
             maximumAge: 30000
         };
 
-
         //control de logeo
         try {
             this.key = JSON.parse(localStorage.getItem("key"));
