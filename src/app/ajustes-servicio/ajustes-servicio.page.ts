@@ -1,23 +1,28 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 @Component({
-    selector: 'app-ajustes-usuario',
-    templateUrl: './ajustes-usuario.page.html',
-    styleUrls: ['./ajustes-usuario.page.scss'],
+    selector: 'app-ajustes-servicio',
+    templateUrl: './ajustes-servicio.page.html',
+    styleUrls: ['./ajustes-servicio.page.scss'],
 })
-export class AjustesUsuarioPage implements OnInit {
+export class AjustesServicioPage implements OnInit {
 
-    constructor(private router: Router, private platform: Platform, private http: HttpClient, public toastController: ToastController) {
+    constructor(private route: ActivatedRoute, private http: HttpClient, public toastController: ToastController, private router: Router, private platform: Platform) {
+
+
         this.platform.backButton.subscribe(() => {
-            this.router.navigateByUrl('home/ajustes');
+            this.router.navigateByUrl('home');
         })
     }
-    ajustes = ["name", "email"];
+    servicio;
+
     ngOnInit() {
+        this.servicio = this.route.snapshot.paramMap.get('servicio');
     }
     onSubmit(f: NgForm) {
         console.log(f.value);  // { first: '', last: '' }

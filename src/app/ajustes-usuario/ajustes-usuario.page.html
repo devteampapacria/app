@@ -1,9 +1,16 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
         <ion-title>ajustesUsuario</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-
+    <ion-item *ngFor="let ajuste of ajustes">
+        <div class="card">
+            <a href="home/ajustes/{{ajuste}}">modificar {{ajuste}} </a>
+        </div>
+    </ion-item>
 </ion-content>

@@ -26,7 +26,9 @@ export class CrearGeolocalizacionPage implements OnInit {
             timeout: 60000,
             maximumAge: 30000
         };
-
+        this.platform.backButton.subscribe(() => {
+            this.router.navigateByUrl('home');
+        })
         //control de logeo
         try {
             this.key = JSON.parse(localStorage.getItem("key"));

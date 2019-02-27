@@ -51,9 +51,8 @@ const routes: Routes = [
     },
     { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
     { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
-    { path: 'ajustes-usuario', loadChildren: './ajustes-usuario/ajustes-usuario.module#AjustesUsuarioPageModule' },
-
-
+    { path: 'home/ajustes', loadChildren: './ajustes-usuario/ajustes-usuario.module#AjustesUsuarioPageModule' },
+    { path: 'home/ajustes/:servicio', loadChildren: './ajustes-servicio/ajustes-servicio.module#AjustesServicioPageModule' },
 ];
 
 @NgModule({

@@ -1,0 +1,20 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home/ajustes"></ion-back-button>
+        </ion-buttons>
+        <ion-title>ajustes {{servicio}}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <ion-item>
+            <ion-label></ion-label>
+            <ion-input placeholder="{{servicio}}" name="{{servicio}}" ngModel required #first="ngModel"></ion-input>
+        </ion-item>
+        <ion-button type="submit">
+            modificar {{servicio}}
+        </ion-button>
+    </form>
+</ion-content>
