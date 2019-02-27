@@ -14,21 +14,18 @@
         </ion-refresher-content>
     </ion-refresher>
     <ion-item *ngFor="let noticia of noticias">
-        <div class="card">
-            <img [src]="noticia.img">
-            <div>
-                <div>
-                    <span>{{noticia.created_at.split(" ")[0]}}</span>
-                </div>
-                <div>
-                    <p>{{noticia.titulo}}</p>
-                </div>
-                <div>
+
+        <div class="col-xs-12 article-wrapper">
+            <article>
+                <div class="img-wrapper"><img [src]="noticia.img"></div>
+                <h1>{{noticia.titulo}}</h1>
+                <p>{{noticia.created_at.split(" ")[0]}}
+                    <br>
                     <ion-button href="/home/noticia/{{noticia.id}}">
                         ver
                     </ion-button>
-                </div>
-            </div>
+                </p>
+            </article>
         </div>
     </ion-item>
     <ion-infinite-scroll (ionInfinite)="loadData($event)">
