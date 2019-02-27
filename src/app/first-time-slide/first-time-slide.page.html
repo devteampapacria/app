@@ -1,9 +1,110 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>firstTimeSlide</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content padding>
+  <ion-slides [options]="slideOpts" scrollbar="true">
+    <!-- Vista inicial, información básica sobre de que va la App -->
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <!-- Logo papacria -->
+            <img class="slide1img" src="./assets/papacria_logo_2019.png" alt="Logo Papacria">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col text-center>
+            <h1>¡Bienvenido!</h1>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>¡Gracias por descargar nuestra aplicación de movil!</p>
+            <p>
+              Con esta aplicación podrás crear geolocalizaciones, ver el mapa en el que colaboran los usuarios, y estar
+              al día sobre las últimas noticias sobre nosotros.
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
 
+    <!-- Vista informativa sobre de que va el proyecto de Papacria -->
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <img class="slide1img"
+              src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fs3.amazonaws.com%2Fimages.charitybuzz.com%2Fimages%2F276464%2Foriginal.jpeg%3F1480348456&f=1"
+              alt="">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col text-center>
+            <h1>¿En qué consiste el proyecto?</h1>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Este proyecto pretende dar visibilidad a un problema común en muchos lugares del planeta, <i>"la
+                basura"</i>, </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <!-- 
+     Vista indicando que si sigue utilizando la aplicación se aceptan los términos y condiciones
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <img class="slide1img"
+              src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fs3.amazonaws.com%2Fimages.charitybuzz.com%2Fimages%2F276464%2Foriginal.jpeg%3F1480348456&f=1"
+              alt="">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>Al continuar utilizando la aplicación aceptas los términos y condiciones</p>
+             Enlace a los terminos y condiciones
+            <a href="#">Términos y condiciones</a>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+ -->
+    <!-- Vista final, al hacer tap en el botón se redireccionará a 'home' y no se volverá a mostrar estas vistas. -->
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <img class="slide1img"
+              src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fs3.amazonaws.com%2Fimages.charitybuzz.com%2Fimages%2F276464%2Foriginal.jpeg%3F1480348456&f=1"
+              alt="">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col text-center>
+            <h1>¿Preparado?</h1>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div>
+              <!-- Link a los terminos y condiciones de papacria -->
+              <ion-checkbox (ionChange)="checkChanged($event)" slot="start"></ion-checkbox>
+              <ion-label> Acepto los <a href="http://www.papacria.com/Huellas-de-La-Ignorancia/">términos y
+                  condiciones</a></ion-label>
+              
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button [disabled]="!proceed" class="noMayusButton" (click)="checkFirstTime()">Empezar <ion-icon
+              name="arrow-forward">
+            </ion-icon>
+          </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

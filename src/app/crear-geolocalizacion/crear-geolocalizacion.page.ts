@@ -29,6 +29,7 @@ export class CrearGeolocalizacionPage implements OnInit {
 
         //control de logeo
         try {
+          console.log('entro en logeo')
             this.key = JSON.parse(localStorage.getItem("key"));
             console.log(this.key.success.id_user);
         } catch (e) {

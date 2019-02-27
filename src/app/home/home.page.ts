@@ -7,7 +7,19 @@ import { Router } from '@angular/router';
     styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+    key;
     constructor(private router: Router) {
-        console.log(localStorage.getItem("key"));
+        let confirmation = localStorage.getItem('firstTimeConfirmation');
+        if (localStorage.getItem('firstTimeConfirmation') != null) {
+          if (JSON.parse(confirmation) == true) {
+            this.router.navigateByUrl('/home');
+          }
+        } else {
+          this.router.navigateByUrl('/first-time-slide');
+        }
+
+        if (localStorage.getItem('key')) {
+            this.key = JSON.parse(localStorage.getItem('key')).success;
+        }
     }
 }

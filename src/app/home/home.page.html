@@ -10,26 +10,46 @@
 </ion-header>
 
 <ion-content>
-    <div class="lailaFont">
-      <h1>Nuestro proyecto, tu proyecto</h1>
-    </div>
+    <ion-grid>
+        <ion-row>
+          <ion-col text-center>
+            <h1 class="lailaFont">Nuestro proyecto, tu proyecto</h1>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="key" text-center>
+          <ion-col align-self-end>
+            <!-- Primera estadistica -->
+            <h3>Geolocalizaciones</h3>
+            <h1>{{key.validGeos}}</h1>
+          </ion-col>
+          <ion-col>
+            <!-- Segunda estadistica -->
+            <h3>Nº de fotos subidas</h3>
+            <h1>{{key.numPhotos}}</h1>
+          </ion-col>
+          <ion-col>
+            <!-- Tercera estadistica -->
+            <h3>Puntuación</h3>
+            <h1>{{key.score}}</h1>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="crear">
+        <ion-icon name="add"></ion-icon>
+        <ion-label>Crear punto</ion-label>
+      </ion-tab-button>
 
-    <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="crear">
-          <ion-icon name="add"></ion-icon>
-          <ion-label>Crear punto</ion-label>
-        </ion-tab-button>
-    
-        <ion-tab-button tab="mapa">
-          <ion-icon name="map"></ion-icon>
-          <ion-label>Mapa</ion-label>
-        </ion-tab-button>
-    
-        <ion-tab-button tab="noticias">
-          <ion-icon name="paper"></ion-icon>
-          <ion-label>Noticias</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+      <ion-tab-button tab="mapa">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>Mapa</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="noticias">
+        <ion-icon name="paper"></ion-icon>
+        <ion-label>Noticias</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>
