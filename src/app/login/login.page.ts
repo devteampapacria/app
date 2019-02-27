@@ -51,7 +51,7 @@ export class LoginPage implements OnInit {
         this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/login", f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
             .subscribe(data => {
                 localStorage.setItem("key", JSON.stringify(data));
-
+                console.log(data);
                 this.router.navigateByUrl('/home');
             }, error => {
                 console.log(error);
