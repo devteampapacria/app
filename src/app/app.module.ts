@@ -12,26 +12,29 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ImageModalPageModule } from './image-modal/image-modal.module';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    IonicModule.forRoot(),
-    AppRoutingModule,
-    ImageModalPageModule
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    Camera,
-    HTTP,
-    Geolocation,
-    InAppBrowser,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    entryComponents: [],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        ImageModalPageModule
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        Camera,
+        HTTP,
+        Geolocation,
+        InAppBrowser,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        FCM,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
