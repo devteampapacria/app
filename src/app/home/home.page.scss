@@ -2,3 +2,9 @@
   font-family: 'Laila', serif;
 }
 
+.userAvatar {
+  shape-outside: circle(50%);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}

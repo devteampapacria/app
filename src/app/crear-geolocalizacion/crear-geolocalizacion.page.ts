@@ -14,11 +14,12 @@ export class CrearGeolocalizacionPage implements OnInit {
     images = [null, null, null, null];
     BreakException = {};
     space = false;
-    latitud = 1;
-    longitud = 1;
+    latitud = null;
+    longitud = null;
     isLoading = false;
     descriptArea;
     key;
+    isGeoActive = false;
 
     constructor(private platform: Platform, private router: Router, private http: HttpClient, private camera: Camera, private geolocation: Geolocation) {
         var options = {
@@ -43,8 +44,13 @@ export class CrearGeolocalizacionPage implements OnInit {
             this.geolocation.getCurrentPosition(options).then((resp) => {
                 this.latitud = resp.coords.latitude;
                 this.longitud = resp.coords.longitude;
+                this.isGeoActive = true;
+                this.isLoading = false;
             }).catch((error) => {
-                alert(error.message);
+                alert("No podemos encontrar tu ubicación, asegurate de que la aplicación tiene permiso para utilizar tu ubicación");
+                this.latitud = null;
+                this.longitud = null;
+                this.isGeoActive = false;
             });
 
         });
@@ -103,6 +109,7 @@ export class CrearGeolocalizacionPage implements OnInit {
                 "imagenes": this.images,
                 "recogido": 0,
                 "user_id": this.key.success.id_user,
+                "key": this.key.success.token
             }
 
             this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/crearPunto", punto, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json' }) })
@@ -114,7 +121,7 @@ export class CrearGeolocalizacionPage implements OnInit {
                     this.isLoading = false;
                 });
         } else {
-            alert('No sacado ninguna foto');
+            alert('No has sacado ninguna foto');
         }
     }
 }

@@ -59,7 +59,8 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: './register/register.module#RegisterPageModule'
-  },
+  },  { path: 'mis-geolocalizaciones', loadChildren: './mis-geolocalizaciones/mis-geolocalizaciones.module#MisGeolocalizacionesPageModule' },
+
 
 
 ];

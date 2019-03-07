@@ -13,8 +13,10 @@
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let image of images; let i = index">
-        <div class="addImageButton" text-center (click)="takePicture()" *ngIf="!image">
+        <div class="addImageButton" text-center (click)="takePicture()" *ngIf="!image && isGeoActive">
           <ion-icon name="add"></ion-icon>
+        </div>
+        <div class="addImageButton" text-center *ngIf="!image && !isGeoActive">
         </div>
         <div class="addImageButton" text-center *ngIf="image">
           <img [src]="image">
@@ -45,7 +47,11 @@
     <ion-label class="descriptionTitle" position="stacked">Descripción</ion-label>
     <ion-textarea name="description" [(ngModel)]="descriptArea" autosize placeholder="Introduce más información acerca de las fotos..."></ion-textarea>
   </ion-item>
-  <ion-button (click)="createGeolocation(descriptArea)" padding>
+  <ion-button *ngIf="isGeoActive" (click)="createGeolocation(descriptArea)" padding>
+    <ion-icon slot="end" name="send"></ion-icon>
+  </ion-button>
+
+  <ion-button *ngIf="!isGeoActive" disabled (click)="createGeolocation(descriptArea)" padding>
     <ion-icon slot="end" name="send"></ion-icon>
   </ion-button>
 </ion-content>

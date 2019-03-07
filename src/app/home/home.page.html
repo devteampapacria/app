@@ -10,30 +10,39 @@
 </ion-header>
 
 <ion-content>
-    <ion-grid>
-        <ion-row>
-          <ion-col text-center>
-            <h1 class="lailaFont">Nuestro proyecto, tu proyecto</h1>
-          </ion-col>
-        </ion-row>
-        <ion-row *ngIf="key" text-center>
-          <ion-col align-self-end>
-            <!-- Primera estadistica -->
-            <h3>Geolocalizaciones</h3>
-            <h1>{{key.validGeos}}</h1>
-          </ion-col>
-          <ion-col>
-            <!-- Segunda estadistica -->
-            <h3>Nº de fotos subidas</h3>
-            <h1>{{key.numPhotos}}</h1>
-          </ion-col>
-          <ion-col>
-            <!-- Tercera estadistica -->
-            <h3>Puntuación</h3>
-            <h1>{{key.score}}</h1>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <h1 class="lailaFont">Nuestro proyecto</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <img class="slide1img" src="./assets/papacria_logo_2019.png" alt="Logo Papacria">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <h1 class="lailaFont">tu proyecto</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="key" text-center>
+      <ion-col>
+        <!-- User's icon -->
+        <div class="userAvatar" [style.background-image]="'url(' + key.avatar + ')'">
+        </div>
+      </ion-col>
+      <ion-col>
+        <h1><ion-icon name="ribbon"></ion-icon>{{key.score}}</h1>
+      </ion-col>
+      <ion-col>
+        <h1><ion-icon name="photos"></ion-icon>{{key.numPhotos}}</h1>
+      </ion-col>
+      <ion-col>
+        <h1><ion-icon name="pin"></ion-icon>{{key.validGeos}}</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-tabs>
     <ion-tab-bar slot="bottom">
       <ion-tab-button tab="crear">
