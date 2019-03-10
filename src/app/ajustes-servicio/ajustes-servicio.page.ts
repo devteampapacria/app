@@ -20,6 +20,7 @@ export class AjustesServicioPage implements OnInit {
         })
     }
     servicio;
+    key;
 
     ngOnInit() {
         this.servicio = this.route.snapshot.paramMap.get('servicio');
@@ -27,20 +28,28 @@ export class AjustesServicioPage implements OnInit {
     onSubmit(f: NgForm) {
         console.log(f.value);  // { first: '', last: '' }
         console.log(f.valid);  // false
+        try {
+            this.key = JSON.parse(localStorage.getItem("key"));
+            console.log(this.key.success.id_user);
+            f.value["id"] = this.key.success.id_user;
+            f.value["token"] = this.key.success.token;
+        } catch (e) {
+            this.router.navigateByUrl('/login');
+        }
 
-        // this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/register", f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
-        //     .subscribe(data => {
-        //         localStorage.setItem("key", JSON.stringify(data));
+        this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/" + this.servicio, f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
+            .subscribe(data => {
+                this.presentToast("Tu " + this.servicio + " ha sido modificado correctamente");
 
-        //     }, error => {
+            }, error => {
 
-        //         this.presentToast();
-        //     });
+                this.presentToast("Encontramos un error en tu petición");
+            });
 
     }
-    async presentToast() {
+    async presentToast(mensaje) {
         const toast = await this.toastController.create({
-            message: "mensaje",
+            message: mensaje,
             duration: 2000,
             showCloseButton: true,
             closeButtonText: 'X',

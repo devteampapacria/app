@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Platform } from '@ionic/angular';
+
 @Component({
     selector: 'app-noticias',
     templateUrl: './noticias.page.html',
@@ -15,9 +18,11 @@ export class NoticiasPage implements OnInit {
     private todas;
     //indice de noticias que llevamos
     i = 1;
-
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private router: Router, private platform: Platform) {
         this.doRefresh(event);
+        this.platform.backButton.subscribe(() => {
+            this.router.navigateByUrl('home');
+        })
     }
     //cuando se llame al evento de loaddata
     loadData(event) {

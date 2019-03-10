@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { Platform } from "@ionic/angular";
 @Component({
     selector: 'app-register',
     templateUrl: './register.page.html',
@@ -48,7 +49,11 @@ import { ToastController } from '@ionic/angular';
 })
 export class RegisterPage implements OnInit {
 
-    constructor(private http: HttpClient, private router: Router, public toastController: ToastController) { }
+    constructor(private http: HttpClient, private router: Router, public toastController: ToastController, private platform: Platform) {
+        this.platform.backButton.subscribe(() => {
+            this.router.navigateByUrl('home');
+        })
+    }
 
     ngOnInit() {
     }
