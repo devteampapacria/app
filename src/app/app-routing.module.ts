@@ -13,10 +13,6 @@ const routes: Routes = [
     loadChildren: './home/home.module#HomePageModule'
   },
   {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
-  },
-  {
     path: 'home/crear',
     loadChildren: './crear-geolocalizacion/crear-geolocalizacion.module#CrearGeolocalizacionPageModule'
   },
@@ -59,7 +55,16 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: './register/register.module#RegisterPageModule'
-  },  { path: 'mis-geolocalizaciones', loadChildren: './mis-geolocalizaciones/mis-geolocalizaciones.module#MisGeolocalizacionesPageModule' },
+  },
+  {
+    path: 'mis-geolocalizaciones',
+    loadChildren: './mis-geolocalizaciones/mis-geolocalizaciones.module#MisGeolocalizacionesPageModule'
+  },
+  {
+    path: 'clasificacion',
+    loadChildren: './clasificacion/clasificacion.module#ClasificacionPageModule'
+  },
+
 
 
 

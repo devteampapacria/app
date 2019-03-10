@@ -19,6 +19,11 @@ export class AppComponent {
       title: 'Mis Geolocalizaciones',
       url: '/mis-geolocalizaciones',
       icon: 'pin'
+    },
+    {
+      title: 'Clasificación',
+      url: '/clasificacion',
+      icon: 'star-half'
     }
   ];
 
