@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8" />
   <title>Ionic App</title>
-
   <base href="/" />
 
-  <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="format-detection" content="telephone=no" />
   <meta name="msapplication-tap-highlight" content="no" />
 
@@ -18,10 +18,23 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
 </head>
 
 <body>
   <app-root></app-root>
+  <script>
+    window.onload = function () {
+      grecaptcha.render('g-recaptcha', { 'sitekey': '6LdLzpYUAAAAAP6EWNqwovoN8xvNJm_6RWAqmbHN' })
+    }
+    function enableBtn(){
+        document.getElementById("submit_details").disabled = false;
+    }
+    
+    function disableButton() {
+        document.getElementById("submit_details").disabled = true;
+    }
+  </script>
 </body>
 
 </html>
