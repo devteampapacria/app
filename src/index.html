@@ -29,10 +29,15 @@
     }
     function enableBtn(){
         document.getElementById("submit_details").disabled = false;
+        getCaptcha();
     }
     
     function disableButton() {
         document.getElementById("submit_details").disabled = true;
+    }
+
+    function getCaptcha() {
+      document.getElementById("captchaRegister").value = grecaptcha.getResponse();
     }
   </script>
 </body>

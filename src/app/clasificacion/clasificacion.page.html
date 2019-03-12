@@ -10,8 +10,13 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
 
-  <ion-grid class="striped" *ngIf="noData">
+  <ion-grid class="stripedUser" *ngIf="noData">
     <ion-row [style.background-color]="'#F3F3F3'">
       <ion-col>
         <div>
@@ -24,7 +29,7 @@
   </ion-grid>
 
 
-  <ion-grid *ngIf="userData" class="striped">
+  <ion-grid *ngIf="userData" class="stripedUser">
     <ion-row *ngIf="userData.position == 1" class="userFirst" text-center>
       <ion-col>
         {{userData.position}}
@@ -116,4 +121,8 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+  <ion-infinite-scroll (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

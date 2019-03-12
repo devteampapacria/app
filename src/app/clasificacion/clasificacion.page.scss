@@ -9,8 +9,10 @@
   }
 
 
-  .striped ion-row {
+  .striped ion-row, .stripedUser {
     border-radius: 3px;
+    padding: 10px;
+    margin: 3px;
   }
 
   .striped ion-row:nth-child(2n+3), .userNormal{
@@ -27,8 +29,3 @@
   .striped ion-row:nth-child(3), .userThird {
     background-color: #cd7f32;
   } 
-
-  .striped ion-row {
-      padding: 10px;
-      margin: 3px;
-  }

@@ -12,6 +12,7 @@ import { Platform } from "@ionic/angular";
     styleUrls: ['./register.page.scss']
 })
 export class RegisterPage implements OnInit {
+    grecaptcha;
     constructor(private network: Network, private http: HttpClient, private router: Router, public toastController: ToastController, private platform: Platform) {
         this.platform.backButton.subscribe(() => {
             this.router.navigateByUrl('home');
@@ -26,7 +27,7 @@ export class RegisterPage implements OnInit {
     }
 
     onSubmit(f: NgForm) {
-        f.value.g_recaptcha_response = grecaptcha.getResponse();
+        //f.value.g_recaptcha_response = this.grecaptcha.getResponse();
         this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/register", f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
             .subscribe(data => {
                 localStorage.setItem("key", JSON.stringify(data));

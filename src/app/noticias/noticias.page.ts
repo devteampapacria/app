@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { ViewChild } from '@angular/core';
@@ -25,6 +25,7 @@ export class NoticiasPage {
         this.network.onDisconnect().subscribe(() => {
             this.router.navigateByUrl('/network-error');
         });
+
         this.doRefresh(event);
         this.platform.backButton.subscribe(() => {
             this.router.navigateByUrl('home');

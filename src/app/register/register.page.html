@@ -26,6 +26,7 @@
             <ion-label></ion-label>
             <ion-input placeholder="Repite la contraseña" type="password" name="password_confirmation" ngModel required>
             </ion-input>
+            <ion-input id="captchaRegister" type="hidden" name="g_recaptcha_response" ngModel></ion-input>
         </ion-item>
         <div id="g-recaptcha" class="g-recaptcha" data-callback="enableBtn" data-expired-callback="disableButton"></div>
         <ion-button disabled id="submit_details" type="submit">
