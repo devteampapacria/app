@@ -1,0 +1,119 @@
+<ion-header>
+  <ion-toolbar class="greenyToolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Clasificación
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid class="striped" *ngIf="noData">
+    <ion-row [style.background-color]="'#F3F3F3'">
+      <ion-col>
+        <div>
+          <p>
+            {{noData}}
+          </p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid *ngIf="userData" class="striped">
+    <ion-row *ngIf="userData.position == 1" class="userFirst" text-center>
+      <ion-col>
+        {{userData.position}}
+      </ion-col>
+      <ion-col>
+        <div class="userAvatar" [style.background-image]="'url(' + userData.avatar + ')'"></div>
+      </ion-col>
+      <ion-col>
+        {{userData.name}}
+      </ion-col>
+      <ion-col>
+        <ion-icon name="pin"></ion-icon>{{userData.geo}}
+      </ion-col>
+      <ion-col>
+        <ion-icon name="trophy"></ion-icon>{{userData.score}}
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="userData.position == 2" class="userSecond" text-center>
+      <ion-col>
+        {{userData.position}}
+      </ion-col>
+      <ion-col>
+        <div class="userAvatar" [style.background-image]="'url(' + userData.avatar + ')'"></div>
+      </ion-col>
+      <ion-col>
+        {{userData.name}}
+      </ion-col>
+      <ion-col>
+        <ion-icon name="pin"></ion-icon>{{userData.geo}}
+      </ion-col>
+      <ion-col>
+        <ion-icon name="trophy"></ion-icon>{{userData.score}}
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="userData.position == 3" class="userThird" text-center>
+      <ion-col>
+        {{userData.position}}
+      </ion-col>
+      <ion-col>
+        <div class="userAvatar" [style.background-image]="'url(' + userData.avatar + ')'"></div>
+      </ion-col>
+      <ion-col>
+        {{userData.name}}
+      </ion-col>
+      <ion-col>
+        <ion-icon name="pin"></ion-icon>{{userData.geo}}
+      </ion-col>
+      <ion-col>
+        <ion-icon name="trophy"></ion-icon>{{userData.score}}
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="userData.position != 3 && userData.position != 2 && userData.position != 1" class="userNormal"
+      text-center>
+      <ion-col>
+        {{userData.position}}
+      </ion-col>
+      <ion-col>
+        <div class="userAvatar" [style.background-image]="'url(' + userData.avatar + ')'"></div>
+      </ion-col>
+      <ion-col>
+        {{userData.name}}
+      </ion-col>
+      <ion-col>
+        <ion-icon name="pin"></ion-icon>{{userData.geo}}
+      </ion-col>
+      <ion-col>
+        <ion-icon name="trophy"></ion-icon>{{userData.score}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <hr>
+  <ion-grid class="striped">
+    <ion-row *ngFor="let user of rankings" text-center>
+      <ion-col>
+        {{user.position}}
+      </ion-col>
+      <ion-col>
+        <div class="userAvatar" [style.background-image]="'url(' + user.avatar + ')'"></div>
+      </ion-col>
+      <ion-col>
+        {{user.name}}
+      </ion-col>
+      <ion-col>
+        <ion-icon name="pin"></ion-icon>{{user.geo}}
+      </ion-col>
+      <ion-col>
+        <ion-icon name="trophy"></ion-icon>{{user.score}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

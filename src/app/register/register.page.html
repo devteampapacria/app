@@ -1,9 +1,43 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
         <ion-title>register</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-    <ng-form #myForm="ngForm">
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+        <ion-item>
+            <ion-label></ion-label>
+            <ion-input placeholder="Nombre" name="name" ngModel required #first="ngModel"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label></ion-label>
+            <ion-input placeholder="Email" type="email" name="email" ngModel required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label></ion-label>
+            <ion-input placeholder="Contraseña" type="password" name="password" ngModel required #first="ngModel">
+            </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label></ion-label>
+            <ion-input placeholder="Repite la contraseña" type="password" name="password_confirmation" ngModel required>
+            </ion-input>
+        </ion-item>
+        <div id="g-recaptcha" class="g-recaptcha" data-callback="enableBtn" data-expired-callback="disableButton"></div>
+        <ion-button disabled id="submit_details" type="submit">
+            Registrarme
+        </ion-button>
+    </form>
+
+    <br><br>
+
+    <a href="/login">
+        ¿Ya tienes cuenta?
+    </a>
+
+
 </ion-content>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
+import { RouteReuseStrategy, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { Camera } from '@ionic-native/camera/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -37,4 +37,8 @@ import { FCM } from '@ionic-native/fcm/ngx';
     ],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private router : Router) {
+    
+  }
+}

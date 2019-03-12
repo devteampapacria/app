@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
     selector: 'app-login',
@@ -40,7 +41,12 @@ import { Platform } from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-    constructor(private http: HttpClient, private router: Router, public toastController: ToastController, private platform: Platform) {
+    constructor(private http: HttpClient, private network: Network, private router: Router, public toastController: ToastController, private platform: Platform) {
+        // watch network for a disconnection
+        this.network.onDisconnect().subscribe(() => {
+            this.router.navigateByUrl('/network-error');
+        });
+
         this.platform.backButton.subscribe(() => {
             this.router.navigateByUrl('home');
         })

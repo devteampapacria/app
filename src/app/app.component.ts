@@ -11,18 +11,23 @@ import { Router } from '@angular/router';
     templateUrl: 'app.component.html'
 })
 export class AppComponent {
-    public appPages = [
-        {
-            title: 'Home',
-            url: '/home',
-            icon: 'home'
-        },
-        {
-            title: 'List',
-            url: '/list',
-            icon: 'list'
-        }
-    ];
+  public appPages = [
+    {
+      title: 'Inicio',
+      url: '/home',
+      icon: 'home'
+    },
+    {
+      title: 'Mis Geolocalizaciones',
+      url: '/mis-geolocalizaciones',
+      icon: 'pin'
+    },
+    {
+      title: 'Clasificación',
+      url: '/clasificacion',
+      icon: 'star-half'
+    }
+  ];
 
     constructor(
         private platform: Platform,

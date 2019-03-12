@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Platform } from "@ionic/angular";
+import { Router } from '@angular/router';
+import { Network } from '@ionic-native/network/ngx';
 
 /// <reference path="./types/MicrosoftMaps/Microsoft.Maps.All.d.ts"/>
 
@@ -11,7 +12,7 @@ import { Platform } from "@ionic/angular";
     templateUrl: './mapa-app.page.html',
     styleUrls: ['./mapa-app.page.scss'],
 })
-export class MapaAppPage implements OnInit {
+export class MapaAppPage {
     map;
     loadPromise: Promise<void>;
     latitude;
@@ -20,18 +21,21 @@ export class MapaAppPage implements OnInit {
     pinClicked;
     isLoading = false;
 
-    ngOnInit() {
-    }
-
-    constructor(private platform: Platform, public router: Router, public geolocation: Geolocation, public http: HttpClient) {
-        this.platform.backButton.subscribe(() => {
-            this.router.navigateByUrl('home');
-        })
-        var options = {
-            enableHighAccuracy: true,
-            timeout: 60000,
-            maximumAge: 30000
-        };
+  constructor(private network: Network, private platform: Platform, public router: Router, public geolocation: Geolocation, public http: HttpClient) {
+    this.platform.backButton.subscribe(() => {
+        this.router.navigateByUrl('home');
+    })
+    
+    // watch network for a disconnection
+    this.network.onDisconnect().subscribe(() => {
+      this.router.navigateByUrl('/network-error');
+    });
+    
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 60000,
+      maximumAge: 30000
+    };
 
         this.platform.ready().then(() => {
             this.load().then(() => {

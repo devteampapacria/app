@@ -1,42 +1,64 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="greenyToolbar">
     <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+      Inicio
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card">
-      <ion-img src="/assets/shapes.svg"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
-      </ion-card-content>
-    </ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col text-center>
+        <h1 class="lailaFont">Nuestro proyecto</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <img class="slide1img" src="./assets/papacria_logo_2019.png" alt="Logo Papacria">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <h1 class="lailaFont">tu proyecto</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="key" text-center>
+      <ion-col>
+        <!-- User's icon -->
+        <div class="userAvatar" [style.background-image]="'url(' + key.avatar + ')'">
+        </div>
+      </ion-col>
+      <ion-col>
+        <h1><ion-icon name="trophy"></ion-icon>{{key.score}}</h1>
+      </ion-col>
+      <ion-col>
+        <h1><ion-icon name="photos"></ion-icon>{{key.numPhotos}}</h1>
+      </ion-col>
+      <ion-col>
+        <h1><ion-icon name="pin"></ion-icon>{{key.validGeos}}</h1>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="crear">
+        <ion-icon name="add"></ion-icon>
+        <ion-label>Crear punto</ion-label>
+      </ion-tab-button>
 
-    <ion-tabs>
-      <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="crear">
-          <ion-icon name="add"></ion-icon>
-          <ion-label>Crear punto</ion-label>
-        </ion-tab-button>
-    
-        <ion-tab-button tab="mapa">
-          <ion-icon name="map"></ion-icon>
-          <ion-label>Mapa</ion-label>
-        </ion-tab-button>
-    
-        <ion-tab-button tab="noticias">
-          <ion-icon name="paper"></ion-icon>
-          <ion-label>Noticias</ion-label>
-        </ion-tab-button>
-      </ion-tab-bar>
-    </ion-tabs>
+      <ion-tab-button tab="mapa">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>Mapa</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="noticias">
+        <ion-icon name="paper"></ion-icon>
+        <ion-label>Noticias</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>

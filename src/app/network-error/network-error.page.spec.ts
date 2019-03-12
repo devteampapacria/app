@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapaPage } from './mapa.page';
+import { NetworkErrorPage } from './network-error.page';
 
-describe('MapaPage', () => {
-  let component: MapaPage;
-  let fixture: ComponentFixture<MapaPage>;
+describe('NetworkErrorPage', () => {
+  let component: NetworkErrorPage;
+  let fixture: ComponentFixture<NetworkErrorPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapaPage ],
+      declarations: [ NetworkErrorPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapaPage);
+    fixture = TestBed.createComponent(NetworkErrorPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

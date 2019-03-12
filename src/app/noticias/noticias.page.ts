@@ -4,13 +4,14 @@ import { IonInfiniteScroll } from '@ionic/angular';
 import { ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
     selector: 'app-noticias',
     templateUrl: './noticias.page.html',
     styleUrls: ['./noticias.page.scss'],
 })
-export class NoticiasPage implements OnInit {
+export class NoticiasPage {
     @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
     //aqui almacenamos todas las noticias que se van a ver
     private noticias = new Array;
@@ -18,13 +19,18 @@ export class NoticiasPage implements OnInit {
     private todas;
     //indice de noticias que llevamos
     i = 1;
-    constructor(private http: HttpClient, private router: Router, private platform: Platform) {
+
+    constructor(private network: Network, private router: Router, private http: HttpClient, private platform: Platform) {
+        // watch network for a disconnection
+        this.network.onDisconnect().subscribe(() => {
+            this.router.navigateByUrl('/network-error');
+        });
         this.doRefresh(event);
         this.platform.backButton.subscribe(() => {
             this.router.navigateByUrl('home');
         })
     }
-    //cuando se llame al evento de loaddata
+    //cuando se llame al evento de loadData
     loadData(event) {
         setTimeout(() => {
             this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?page=' + this.i).subscribe((response) => {
@@ -59,7 +65,4 @@ export class NoticiasPage implements OnInit {
             });
         }, 100);
     }
-    ngOnInit() {
-    }
-
 }

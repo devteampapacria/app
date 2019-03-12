@@ -1,0 +1,34 @@
+.userAvatar {
+    shape-outside: circle(50%);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-size: cover;
+    background-position: center;
+  }
+
+
+  .striped ion-row {
+    border-radius: 3px;
+  }
+
+  .striped ion-row:nth-child(2n+3), .userNormal{
+    background-color: #d3d3d3;
+  }
+
+  .striped ion-row:nth-child(1), .userFirst {
+    background-color: gold;
+  }
+
+  .striped ion-row:nth-child(2), .userSecond {
+    background-color: silver;
+  }
+  .striped ion-row:nth-child(3), .userThird {
+    background-color: #cd7f32;
+  } 
+
+  .striped ion-row {
+      padding: 10px;
+      margin: 3px;
+  }
