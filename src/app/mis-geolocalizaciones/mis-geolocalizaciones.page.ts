@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Platform } from "@ionic/angular";
+import { Router } from '@angular/router';
+import { Network } from '@ionic-native/network/ngx';
 
 /// <reference path="./types/MicrosoftMaps/Microsoft.Maps.All.d.ts"/>
 
@@ -23,7 +24,12 @@ export class MisGeolocalizacionesPage implements OnInit {
   ngOnInit() {
   }
 
-  constructor(private platform: Platform, public router: Router, public geolocation: Geolocation, public http: HttpClient) {
+  constructor(private network: Network, private platform: Platform, public router: Router, public geolocation: Geolocation, public http: HttpClient) {
+    // watch network for a disconnection
+    this.network.onDisconnect().subscribe(() => {
+      this.router.navigateByUrl('/network-error');
+    });
+
     var options = {
       enableHighAccuracy: true,
       timeout: 60000,
@@ -32,10 +38,10 @@ export class MisGeolocalizacionesPage implements OnInit {
     //control de logeo
     try {
       console.log('entro en logeo')
-        this.key = JSON.parse(localStorage.getItem("key"));
-        console.log(this.key.success.id_user);
+      this.key = JSON.parse(localStorage.getItem("key"));
+      console.log(this.key.success.id_user);
     } catch (e) {
-        this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');
     }
     //fin control de logeo
 

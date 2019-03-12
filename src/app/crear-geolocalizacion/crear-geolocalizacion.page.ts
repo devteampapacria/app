@@ -4,6 +4,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Platform } from "@ionic/angular";
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
     selector: 'app-crear-geolocalizacion',
@@ -21,7 +22,11 @@ export class CrearGeolocalizacionPage implements OnInit {
     key;
     isGeoActive = false;
 
-    constructor(private platform: Platform, private router: Router, private http: HttpClient, private camera: Camera, private geolocation: Geolocation) {
+    constructor(private network: Network, private platform: Platform, private router: Router, private http: HttpClient, private camera: Camera, private geolocation: Geolocation) {
+        // watch network for a disconnection
+        this.network.onDisconnect().subscribe(() => {
+            this.router.navigateByUrl('/network-error');
+        });
         var options = {
             enableHighAccuracy: true,
             timeout: 60000,
@@ -30,7 +35,7 @@ export class CrearGeolocalizacionPage implements OnInit {
 
         //control de logeo
         try {
-          console.log('entro en logeo')
+            console.log('entro en logeo')
             this.key = JSON.parse(localStorage.getItem("key"));
             console.log(this.key.success.id_user);
         } catch (e) {

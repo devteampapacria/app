@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { ImageModalPage } from '../image-modal/image-modal.page';
+import { Network } from '@ionic-native/network/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-geolocalizacion',
@@ -27,7 +29,12 @@ export class GeolocalizacionPage implements OnInit {
     centeredSlides: true
   };
 
-  constructor(private modalController: ModalController, private route: ActivatedRoute, public http: HttpClient) {}
+  constructor(private router: Router, private network: Network, private modalController: ModalController, private route: ActivatedRoute, public http: HttpClient) {
+    // watch network for a disconnection
+    this.network.onDisconnect().subscribe(() => {
+      this.router.navigateByUrl('/network-error');
+    });
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');

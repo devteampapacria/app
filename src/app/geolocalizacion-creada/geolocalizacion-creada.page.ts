@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
   selector: 'app-geolocalizacion-creada',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeolocalizacionCreadaPage implements OnInit {
 
-  constructor() { }
+  constructor(private network: Network, private router: Router) {
+    // watch network for a disconnection
+    this.network.onDisconnect().subscribe(() => {
+      this.router.navigateByUrl('/network-error');
+    });
+  }
 
   ngOnInit() {
   }

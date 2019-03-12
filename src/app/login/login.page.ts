@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Network } from '@ionic-native/network/ngx';
+
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
@@ -36,7 +38,12 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(private http: HttpClient, private network: Network, private router: Router) {
+        // watch network for a disconnection
+        this.network.onDisconnect().subscribe(() => {
+            this.router.navigateByUrl('/network-error');
+        });
+    }
 
     ngOnInit() {
     }

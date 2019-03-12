@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { Platform } from "@ionic/angular";
+import { Router } from '@angular/router';
+import { Network } from '@ionic-native/network/ngx';
 
 /// <reference path="./types/MicrosoftMaps/Microsoft.Maps.All.d.ts"/>
 
@@ -23,7 +24,12 @@ export class MapaAppPage implements OnInit {
   ngOnInit() {
   }
 
-  constructor(private platform: Platform, public router: Router, public geolocation: Geolocation, public http: HttpClient) {
+  constructor(private network: Network, private platform: Platform, public router: Router, public geolocation: Geolocation, public http: HttpClient) {
+    // watch network for a disconnection
+    this.network.onDisconnect().subscribe(() => {
+      this.router.navigateByUrl('/network-error');
+    });
+    
     var options = {
       enableHighAccuracy: true,
       timeout: 60000,

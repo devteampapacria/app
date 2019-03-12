@@ -64,6 +64,11 @@ const routes: Routes = [
     path: 'clasificacion',
     loadChildren: './clasificacion/clasificacion.module#ClasificacionPageModule'
   },
+  {
+    path: 'network-error',
+    loadChildren: './network-error/network-error.module#NetworkErrorPageModule'
+  },
+
 
 
 

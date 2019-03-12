@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
   selector: 'app-first-time-slide',
@@ -11,7 +12,12 @@ export class FirstTimeSlidePage implements OnInit {
     effect: 'flip'
   };
   proceed = false;
-  constructor(private router : Router) {}
+  constructor(private network: Network, private router: Router) {
+    // watch network for a disconnection
+    this.network.onDisconnect().subscribe(() => {
+      this.router.navigateByUrl('/network-error');
+    });
+  }
 
   ngOnInit() {
   }

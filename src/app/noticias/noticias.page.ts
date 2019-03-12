@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { Network } from '@ionic-native/network/ngx';
+
 @Component({
     selector: 'app-noticias',
     templateUrl: './noticias.page.html',
@@ -16,7 +19,11 @@ export class NoticiasPage implements OnInit {
     //indice de noticias que llevamos
     i = 1;
 
-    constructor(private http: HttpClient) {
+    constructor(private network: Network, private router: Router, private http: HttpClient) {
+        // watch network for a disconnection
+        this.network.onDisconnect().subscribe(() => {
+            this.router.navigateByUrl('/network-error');
+        });
         this.doRefresh(event);
     }
     //cuando se llame al evento de loadData

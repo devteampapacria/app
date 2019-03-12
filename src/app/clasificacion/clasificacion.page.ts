@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Network } from '@ionic-native/network/ngx';
 
 @Component({
   selector: 'app-clasificacion',
@@ -13,15 +14,19 @@ export class ClasificacionPage implements OnInit {
   userData;
   noData;
 
-  constructor(public router: Router, public http: HttpClient) {
+  constructor(public router: Router, public http: HttpClient, private network: Network) {
     //control de logeo
     try {
       console.log('entro en logeo')
-        this.key = JSON.parse(localStorage.getItem("key"));
-        console.log(this.key.success);
+      this.key = JSON.parse(localStorage.getItem("key"));
+      console.log(this.key.success);
     } catch (e) {
-        this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');
     }
+    // watch network for a disconnection
+    this.network.onDisconnect().subscribe(() => {
+      this.router.navigateByUrl('/network-error');
+    });
     //fin control de logeo
     this.getRankings();
   }
