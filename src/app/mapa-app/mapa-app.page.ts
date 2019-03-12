@@ -21,26 +21,24 @@ export class MapaAppPage {
     pinClicked;
     isLoading = false;
 
-  constructor(private network: Network, private platform: Platform, public router: Router, public geolocation: Geolocation, public http: HttpClient) {
-    this.platform.backButton.subscribe(() => {
-        this.router.navigateByUrl('home');
-    })
-    
-    // watch network for a disconnection
-    this.network.onDisconnect().subscribe(() => {
-      this.router.navigateByUrl('/network-error');
-    });
-    
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 60000,
-      maximumAge: 30000
-    };
+    constructor(private network: Network, private platform: Platform, public router: Router, public geolocation: Geolocation, public http: HttpClient) {
+        this.platform.backButton.subscribe(() => {
+            this.router.navigateByUrl('home');
+        })
+
+        // watch network for a disconnection
+        this.network.onDisconnect().subscribe(() => {
+            this.router.navigateByUrl('/network-error');
+        });
+
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 60000,
+            maximumAge: 30000
+        };
 
         this.platform.ready().then(() => {
             this.load().then(() => {
-                console.log("Maps loaded");
-
                 this.geolocation.getCurrentPosition(options).then((resp) => {
                     this.map = new Microsoft.Maps.Map(document.getElementById("myMap"), {
                         center: new Microsoft.Maps.Location(
@@ -59,6 +57,7 @@ export class MapaAppPage {
                             zoom: 12
                         });
                         this.addPoints();
+                        this.isLoading = false;
                     });
             });
         })

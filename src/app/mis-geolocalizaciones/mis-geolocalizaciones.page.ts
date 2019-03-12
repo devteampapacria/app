@@ -69,6 +69,7 @@ export class MisGeolocalizacionesPage implements OnInit {
               zoom: 12
             });
             this.addPoints();
+            this.isLoading = false;
           });
       });
     })
