@@ -76,6 +76,11 @@ const routes: Routes = [
     path: 'network-error',
     loadChildren: './network-error/network-error.module#NetworkErrorPageModule'
   },
+  {
+    path: 'cerrar-sesion',
+    loadChildren: './cerrar-sesion/cerrar-sesion.module#CerrarSesionPageModule'
+  },
+
 
 
 

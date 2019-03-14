@@ -39,6 +39,10 @@
     function getCaptcha() {
       document.getElementById("captchaRegister").value = grecaptcha.getResponse();
     }
+
+    function resetRecaptcha() {
+      grecaptcha.reset();
+    }
   </script>
 </body>
 

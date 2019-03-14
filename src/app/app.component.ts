@@ -26,6 +26,11 @@ export class AppComponent {
       title: 'Clasificación',
       url: '/clasificacion',
       icon: 'star-half'
+    },
+    {
+      title: 'Cerrar Sesión',
+      url: '/cerrar-sesion',
+      icon: 'return-left'
     }
   ];
 

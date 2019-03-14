@@ -16,7 +16,7 @@ import { Network } from '@ionic-native/network/ngx';
             <ion-buttons slot="start">
                 <ion-back-button defaultHref="home"></ion-back-button>
             </ion-buttons>
-            <ion-title>login</ion-title>
+            <ion-title>Acceder</ion-title>
         </ion-toolbar>
     </ion-header>
 

@@ -25,9 +25,9 @@ export class RegisterPage implements OnInit {
 
     ngOnInit() {
     }
-
+    form;
     onSubmit(f: NgForm) {
-        //f.value.g_recaptcha_response = this.grecaptcha.getResponse();
+        this.form = f;
         this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/register", f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
             .subscribe(data => {
                 localStorage.setItem("key", JSON.stringify(data));
@@ -38,6 +38,7 @@ export class RegisterPage implements OnInit {
             });
     }
     async presentToast(e) {
+        console.log(e);
         var mensaje;
         switch (Object.keys(e.error.error)[0]) {
             case 'email':
@@ -51,6 +52,10 @@ export class RegisterPage implements OnInit {
                 break;
             case 'password_confirmation':
                 mensaje = e.error.error['password_confirmation'][0];
+                break;
+            case 'g_recaptcha_response':
+                this.form.resetForm();
+                mensaje = e.error.error['g_recaptcha_response'][0];
                 break;
             default:
 

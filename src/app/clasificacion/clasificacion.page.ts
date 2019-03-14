@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { ViewChild } from '@angular/core';
-import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Network } from '@ionic-native/network/ngx';
 
@@ -15,7 +14,6 @@ export class ClasificacionPage {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   key;
-  //rankings;
   userData;
   noData;
   private allRankings;
