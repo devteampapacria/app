@@ -10,10 +10,9 @@ import { Network } from '@ionic-native/network/ngx';
 })
 export class HomePage {
   key;
-  lastTime;
+  userDataInterval;
 
   constructor(private router: Router, private network: Network, public http: HttpClient) {
-    this.lastTime = new Date().getTime();
     let confirmation = localStorage.getItem('firstTimeConfirmation');
     if (localStorage.getItem('firstTimeConfirmation') != null) {
       if (JSON.parse(confirmation) == true) {
@@ -26,29 +25,41 @@ export class HomePage {
     if (localStorage.getItem('key')) {
       this.key = JSON.parse(localStorage.getItem('key')).success;
     }
+    clearInterval(this.userDataInterval);
 
-    if (this.key) {
-      this.keepUpdatingUserData();
+    if (localStorage.getItem('key')) {
+      this.keepUpdatingUserData(true);
+    } else {
+      this.keepUpdatingUserData(false);
     }
-    
-    // watch network for a disconnection
+
     this.network.onDisconnect().subscribe(() => {
       this.router.navigateByUrl('/network-error');
     });
-    
+
   }
 
-  keepUpdatingUserData() {
-    setInterval(function(){
-      this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/userData/' + this.key.id_user).subscribe((response) => {
-        let userData = response;
-        this.key.name = userData.name;
-        this.key.validGeos = userData.validGeos;
-        this.key.score = userData.score;
-        this.key.numPhotos = userData.numPhotos;
-        this.key.avatar = userData.avatar;
-      });
-    }, 1800);
+  keepUpdatingUserData(clear) {
+    console.log(clear);
+    this.getUserData();
+    if (clear == true) {
+      clearInterval(this.userDataInterval);
+      this.userDataInterval = setInterval(() => {
+        this.getUserData();
+      }, 1800)
+    } else if (clear == false) {
+      clearInterval(this.userDataInterval);
+    }
+  }
+
+  getUserData() {
+    this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/userData/' + this.key.id_user).subscribe((response) => {
+      this.key.name = response['name'];
+      this.key.validGeos = response['validGeos'];
+      this.key.score = response['score'];
+      this.key.numPhotos = response['numPhotos'];
+      this.key.avatar = response['avatar'];
+    });
   }
 
 

@@ -90,8 +90,4 @@ export class ClasificacionPage {
       });
     }, 100);
   }
-
-
-
-
 }
