@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Network } from '@ionic-native/network/ngx';
 
-@Component({
-  selector: 'app-cerrar-sesion',
-  templateUrl: './cerrar-sesion.page.html',
-  styleUrls: ['./cerrar-sesion.page.scss'],
+@Injectable({
+  providedIn: 'root'
 })
-export class CerrarSesionPage {
+export class CerrarsesionService {
 
-  constructor(public alertController: AlertController, private network: Network, private router: Router,) {
-    this.presentAlertConfirm();
-   }
+  constructor(public alertController: AlertController, private network: Network, private router: Router) {
+  }
 
   async presentAlertConfirm() {
+    
     let alert = await this.alertController.create({
       header: 'Cerrar sesión',
       message: '¿Deseas cerrar sesión?',
@@ -30,12 +28,14 @@ export class CerrarSesionPage {
           text: 'Cerrar sesión',
           handler: () => {
             localStorage.removeItem('key');
-            this.router.navigateByUrl('/home');
+            localStorage.removeItem('firstTimeConfirmation');
+            this.router.navigateByUrl('/login');
+            
           }
         }
       ]
     });
-
     await alert.present();
+    
   }
 }

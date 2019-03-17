@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { RecaptchaModule } from 'ng-recaptcha';
+import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -18,6 +20,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],

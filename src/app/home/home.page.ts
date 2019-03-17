@@ -22,34 +22,28 @@ export class HomePage {
       this.router.navigateByUrl('/first-time-slide');
     }
 
-    if (localStorage.getItem('key')) {
-      this.key = JSON.parse(localStorage.getItem('key')).success;
-    }
-    clearInterval(this.userDataInterval);
-
-    if (localStorage.getItem('key')) {
-      this.keepUpdatingUserData(true);
-    } else {
-      this.keepUpdatingUserData(false);
-    }
-
     this.network.onDisconnect().subscribe(() => {
       this.router.navigateByUrl('/network-error');
     });
 
   }
 
-  keepUpdatingUserData(clear) {
-    console.log(clear);
-    this.getUserData();
-    if (clear == true) {
+  ionViewWillEnter() {
+    if (localStorage.getItem('key')) {
+      this.key = JSON.parse(localStorage.getItem('key')).success;
+      this.keepUpdatingUserData();
+    }
+  }
+
+  ionViewWillLeave() {
+    clearInterval(this.userDataInterval);
+  }
+
+  keepUpdatingUserData() {
       clearInterval(this.userDataInterval);
       this.userDataInterval = setInterval(() => {
         this.getUserData();
-      }, 1800)
-    } else if (clear == false) {
-      clearInterval(this.userDataInterval);
-    }
+      }, 18000)
   }
 
   getUserData() {
@@ -61,6 +55,8 @@ export class HomePage {
       this.key.avatar = response['avatar'];
     });
   }
+
+
 
 
 }

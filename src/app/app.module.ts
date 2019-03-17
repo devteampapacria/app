@@ -24,6 +24,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
         AppRoutingModule,
         ImageModalPageModule
     ],
+    
     providers: [
         StatusBar,
         SplashScreen,

@@ -1,10 +1,26 @@
 <ion-header>
-    <ion-toolbar>
+        <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button defaultHref="home"></ion-back-button>
+            </ion-buttons>
+            <ion-title>Acceder</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
-        <ion-title>login</ion-title>
-    </ion-toolbar>
-</ion-header>
-
-<ion-content padding>
-
-</ion-content>
+    <ion-content padding>
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+            <ion-item>
+                <ion-input placeholder="Email" type="email" name="email" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-input placeholder="Contraseña" type="password" name="password" ngModel required #first="ngModel"></ion-input><br>
+            </ion-item>
+            <ion-button type="submit">
+                Logeame
+            </ion-button>
+        </form>
+        <br><br>
+        <a href="/register">
+            ¿No tienes cuenta?
+        </a>
+    </ion-content>

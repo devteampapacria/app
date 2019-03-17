@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { Router } from '@angular/router';
+import { CerrarsesionService } from '../app/services/cerrarsesion.service';
 
 @Component({
     selector: 'app-root',
@@ -26,20 +27,26 @@ export class AppComponent {
       title: 'Clasificación',
       url: '/clasificacion',
       icon: 'star-half'
-    },
+    }
+  ];
+
+
+  /* 
+  ,
     {
       title: 'Cerrar Sesión',
       url: '/cerrar-sesion',
       icon: 'return-left'
     }
-  ];
-
+  
+  */
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private fcm: FCM,
-        private router: Router
+        private router: Router,
+        private sesion: CerrarsesionService
     ) {
         this.initializeApp();
     }
@@ -65,5 +72,9 @@ export class AppComponent {
                 this.router.navigate([data.landing_page, data.price]);
             }
         });
+    }
+
+    cerrarSesion() {
+      this.sesion.presentAlertConfirm();
     }
 }
