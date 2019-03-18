@@ -30,7 +30,7 @@ export class AppComponent {
       icon: 'star-half'
     }
   ];
-
+    isLogged = false;
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
@@ -41,6 +41,14 @@ export class AppComponent {
         private menu: MenuController
     ) {
         this.initializeApp();
+    }
+
+    ionViewWillEnter() {
+      if (localStorage.getItem('key')) {
+        this.isLogged = true;
+      } else {
+        this.isLogged = false;
+      }
     }
 
     initializeApp() {

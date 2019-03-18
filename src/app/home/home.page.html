@@ -10,8 +10,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
+  <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+  <ion-grid justify-content-center align-items-center style="height: 100%; flex-direction: column">
+    <!-- <ion-row>
       <ion-col text-center>
         <h1 class="lailaFont">Nuestro proyecto</h1>
       </ion-col>
@@ -25,26 +26,67 @@
       <ion-col text-center>
         <h1 class="lailaFont">tu proyecto</h1>
       </ion-col>
-    </ion-row>
-    <ion-row *ngIf="key" text-center>
+    </ion-row> -->
+    <ion-row>
       <ion-col>
-        <!-- User's icon -->
+        <h3 class="lailaFont" text-center>Fotos tomadas por nuestros usuarios</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <ion-slides [options]="sliderOpts">
+          <ion-slide class="images" *ngFor="let image of images;let i = index">
+            <div class="homeInnerSlides">
+              <b><h5 class="lailaFont userName">{{image.user}}</h5></b>
+              <a class="geoVer" href="/geolocalizacion/{{image.geolocalizacion_id}}">
+                <ion-icon name="pin"></ion-icon>
+              </a>
+              <img [src]="image.resized_name" (load)="image.loaded = true" tappable (click)="openPreview(i,image.id)"
+                [hidden]="!image.loaded">
+            </div>
+            <ion-spinner [hidden]="image.loaded"></ion-spinner>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid class="userData">
+    <ion-row *ngIf="key" text-center align-items-center>
+      <ion-col>
         <div class="userAvatar" [style.background-image]="'url(' + key.avatar + ')'">
         </div>
       </ion-col>
       <ion-col>
-        <h1><ion-icon name="trophy"></ion-icon>{{key.score}}</h1>
+        <h1>
+          <ion-icon name="trophy"></ion-icon>
+          <span>
+            {{key.score}}
+          </span>
+        </h1>
       </ion-col>
       <ion-col>
-        <h1><ion-icon name="photos"></ion-icon>{{key.numPhotos}}</h1>
+        <h1>
+          <ion-icon name="photos"></ion-icon>
+          <span>
+            {{key.numPhotos}}
+          </span>
+        </h1>
       </ion-col>
       <ion-col>
-        <h1><ion-icon name="pin"></ion-icon>{{key.validGeos}}</h1>
+        <h1>
+          <ion-icon name="pin"></ion-icon>
+          <span>
+            {{key.validGeos}}
+          </span>
+        </h1>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+
   <ion-tabs>
-    <ion-tab-bar slot="bottom">
+    <ion-tab-bar slot="bottom" class="greenyToolbar">
       <ion-tab-button tab="crear" class="greenyToolbar">
         <ion-icon name="add"></ion-icon>
         <ion-label>Crear punto</ion-label>
