@@ -30,7 +30,6 @@ export class CerrarsesionService {
             localStorage.removeItem('key');
             localStorage.removeItem('firstTimeConfirmation');
             this.router.navigateByUrl('/login');
-            
           }
         }
       ]

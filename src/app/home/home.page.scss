@@ -17,12 +17,12 @@
   max-width: 400px;
 }
 
-ion-slides {
-  img {
-      width: 40vw;
-      grid-area: imagen;
-      border-radius: 5px;
-  }
+ion-slides img {
+  width: 40vw;
+  grid-area: imagen;
+  border-radius: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 ion-tab-button:nth-child(1), ion-tab-button:nth-child(2) {
@@ -47,11 +47,10 @@ ion-slide {
 
 }
 
-@media (orientation: landscape) {
-  .homeLogo {
-    width: 20%;
+@media only screen and (orientation: landscape) {
+  .sliderGrid {
+    display: none;
   }
-
   .lailaFont {
     font-size: 20px;
   }
@@ -64,41 +63,6 @@ ion-slide {
     width: 50px;
     height: 50px;
   }
-
-  .images {  
-    width: 100%;
-  }
-
-  ion-slides {
-    img {
-        width: 80%;
-    }
-  }
-
-  ion-slide {
-    background-color: ghostWhite;
-    height: 40vh;
-    border-radius: 6px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-
-  .homeInnerSlides {
-    width: 60%;
-  }
-
-
-}
-
-
-ion-slides {
-  img {
-      padding-top: 20px;
-      padding-bottom: 20px;
-  }
-}
-
-.images {
-  width: 100%;
 }
 
 .homeInnerSlides {

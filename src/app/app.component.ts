@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -7,12 +7,14 @@ import { FCM } from '@ionic-native/fcm/ngx';
 import { Router } from '@angular/router';
 import { CerrarsesionService } from '../app/services/cerrarsesion.service';
 import { MenuController } from '@ionic/angular';
+import { IsLoggedService } from './services/is-logged.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   public appPages = [
     {
       title: 'Inicio',
@@ -30,7 +32,15 @@ export class AppComponent {
       icon: 'star-half'
     }
   ];
-    isLogged = false;
+  logged = this.islogged.check();
+
+    isLoggedSubscription: Subscription;
+
+    ngOnInit() {
+      this.islogged.onLogginChange.subscribe(data => {
+        this.logged = data;
+      })
+     }
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
@@ -38,19 +48,12 @@ export class AppComponent {
         private fcm: FCM,
         private router: Router,
         private sesion: CerrarsesionService,
-        private menu: MenuController
+        private menu: MenuController,
+        private islogged: IsLoggedService
     ) {
         this.initializeApp();
     }
-
-    ionViewWillEnter() {
-      if (localStorage.getItem('key')) {
-        this.isLogged = true;
-      } else {
-        this.isLogged = false;
-      }
-    }
-
+    
     initializeApp() {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();

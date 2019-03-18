@@ -11,22 +11,7 @@
 
 <ion-content>
   <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
-  <ion-grid justify-content-center align-items-center style="height: 100%; flex-direction: column">
-    <!-- <ion-row>
-      <ion-col text-center>
-        <h1 class="lailaFont">Nuestro proyecto</h1>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <img class="homeLogo" src="./assets/papacria_logo_2019.png" alt="Logo Papacria">
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <h1 class="lailaFont">tu proyecto</h1>
-      </ion-col>
-    </ion-row> -->
+  <ion-grid class="sliderGrid" justify-content-center align-items-center style="height: 100%; flex-direction: column">
     <ion-row>
       <ion-col>
         <h3 class="lailaFont" text-center>Fotos tomadas por nuestros usuarios</h3>
@@ -51,8 +36,8 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid class="userData">
-    <ion-row *ngIf="key" text-center align-items-center>
+  <ion-grid *ngIf="key" class="userData">
+    <ion-row text-center align-items-center>
       <ion-col>
         <div class="userAvatar" [style.background-image]="'url(' + key.avatar + ')'">
         </div>

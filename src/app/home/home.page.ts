@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ImageModalPage } from '../image-modal/image-modal.page';
 import { ModalController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
+import { IsLoggedService } from '../services/is-logged.service';
 
 @Component({
   selector: 'app-home',
@@ -24,8 +25,17 @@ export class HomePage {
   };
   isLoading = false;
 
-  constructor(private router: Router, private network: Network, public http: HttpClient, private modalController: ModalController, private route: ActivatedRoute, private platform: Platform) {
+  constructor(private router: Router,
+              private network: Network,
+              public http: HttpClient,
+              private modalController: ModalController,
+              private route: ActivatedRoute,
+              private platform: Platform,
+              private islogged: IsLoggedService
+              ) {
+
     let confirmation = localStorage.getItem('firstTimeConfirmation');
+
     if (localStorage.getItem('firstTimeConfirmation') != null) {
       if (JSON.parse(confirmation) == true) {
         this.router.navigateByUrl('/home');
@@ -42,10 +52,11 @@ export class HomePage {
   }
 
   ionViewWillEnter() {
-    if (localStorage.getItem('key')) {
-      this.key = JSON.parse(localStorage.getItem('key')).success;
+    if (this.islogged.check()) {
+      this.key = this.islogged.check().success;
       this.keepUpdatingUserData();
     }
+    this.islogged.listenToLoggin();
   }
 
   ionViewWillLeave() {
