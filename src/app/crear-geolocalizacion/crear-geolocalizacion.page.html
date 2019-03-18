@@ -10,7 +10,7 @@
 
 <ion-content>
   <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
-  <ion-grid>
+  <ion-grid id="pictures">
     <ion-row>
       <ion-col *ngFor="let image of images; let i = index">
         <div class="addImageButton" text-center (click)="takePicture()" *ngIf="!image && isGeoActive">
@@ -48,10 +48,10 @@
     <ion-textarea name="description" [(ngModel)]="descriptArea" autosize placeholder="Introduce más información acerca de las fotos..."></ion-textarea>
   </ion-item>
   <ion-button *ngIf="isGeoActive" (click)="createGeolocation(descriptArea)" padding>
-    <ion-icon slot="end" name="send"></ion-icon>
+      Enviar Geolocalización <ion-icon slot="end" name="send"></ion-icon>
   </ion-button>
 
   <ion-button *ngIf="!isGeoActive" disabled (click)="createGeolocation(descriptArea)" padding>
-    <ion-icon slot="end" name="send"></ion-icon>
+    Enviar Geolocalización <ion-icon slot="end" name="send"></ion-icon>
   </ion-button>
 </ion-content>

@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { Router } from '@angular/router';
 import { CerrarsesionService } from '../app/services/cerrarsesion.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
     selector: 'app-root',
@@ -30,23 +31,14 @@ export class AppComponent {
     }
   ];
 
-
-  /* 
-  ,
-    {
-      title: 'Cerrar Sesión',
-      url: '/cerrar-sesion',
-      icon: 'return-left'
-    }
-  
-  */
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private fcm: FCM,
         private router: Router,
-        private sesion: CerrarsesionService
+        private sesion: CerrarsesionService,
+        private menu: MenuController
     ) {
         this.initializeApp();
     }
@@ -76,5 +68,6 @@ export class AppComponent {
 
     cerrarSesion() {
       this.sesion.presentAlertConfirm();
+      this.menu.close();
     }
 }
