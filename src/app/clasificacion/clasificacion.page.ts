@@ -25,9 +25,7 @@ export class ClasificacionPage {
   constructor(public router: Router, public http: HttpClient, private network: Network) {
     //control de logeo
     try {
-      console.log('entro en logeo')
       this.key = JSON.parse(localStorage.getItem("key"));
-      console.log(this.key.success);
     } catch (e) {
       this.router.navigateByUrl('/login');
     }
@@ -44,7 +42,7 @@ export class ClasificacionPage {
     this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/allRankings').subscribe((response) => {
       this.allRankings = response;
       
-      let index = this.allRankings.findIndex(x => x.id == this.key.success.id_user);
+      let index = this.allRankings.findIndex(x => x.id == this.key.id_user);
       if (index != -1) {
         this.userData = this.allRankings[index];
         console.log(this.userData.position);

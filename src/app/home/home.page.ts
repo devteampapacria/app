@@ -53,7 +53,7 @@ export class HomePage {
 
   ionViewWillEnter() {
     if (this.islogged.check()) {
-      this.key = this.islogged.check().success;
+      this.key = this.islogged.check();
       this.keepUpdatingUserData();
     }
     this.islogged.listenToLoggin();
@@ -77,6 +77,7 @@ export class HomePage {
       this.key.score = response['score'];
       this.key.numPhotos = response['numPhotos'];
       this.key.avatar = response['avatar'];
+      localStorage.setItem("key", JSON.stringify(this.key));
     });
   }
 

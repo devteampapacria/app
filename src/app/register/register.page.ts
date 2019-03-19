@@ -37,7 +37,7 @@ export class RegisterPage implements OnInit{
         this.form = f;
         this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/register", f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
             .subscribe(data => {
-                localStorage.setItem("key", JSON.stringify(data));
+                localStorage.setItem("key", JSON.stringify(data['success']));
                 this.router.navigateByUrl('/home');
             }, error => {
                 this.presentToast(error);
