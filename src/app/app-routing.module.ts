@@ -75,7 +75,8 @@ const routes: Routes = [
   {
     path: 'network-error',
     loadChildren: './network-error/network-error.module#NetworkErrorPageModule'
-  },
+  }
+
 
 
 

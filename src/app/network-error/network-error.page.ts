@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Network } from '@ionic-native/network/ngx';
 
@@ -7,7 +7,7 @@ import { Network } from '@ionic-native/network/ngx';
   templateUrl: './network-error.page.html',
   styleUrls: ['./network-error.page.scss'],
 })
-export class NetworkErrorPage implements OnInit {
+export class NetworkErrorPage {
 
   constructor(private router: Router, private network: Network) {
     // watch network for a connection
@@ -16,8 +16,4 @@ export class NetworkErrorPage implements OnInit {
     });
 
   }
-
-  ngOnInit() {
-  }
-
 }

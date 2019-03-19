@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Network } from '@ionic-native/network/ngx';
 
@@ -7,7 +7,7 @@ import { Network } from '@ionic-native/network/ngx';
   templateUrl: './first-time-slide.page.html',
   styleUrls: ['./first-time-slide.page.scss'],
 })
-export class FirstTimeSlidePage implements OnInit {
+export class FirstTimeSlidePage {
   slideOpts = {
     effect: 'flip'
   };
@@ -18,10 +18,6 @@ export class FirstTimeSlidePage implements OnInit {
       this.router.navigateByUrl('/network-error');
     });
   }
-
-  ngOnInit() {
-  }
-
   checkFirstTime() {
     localStorage.setItem('firstTimeConfirmation', JSON.stringify(true));
     this.router.navigateByUrl('/home');

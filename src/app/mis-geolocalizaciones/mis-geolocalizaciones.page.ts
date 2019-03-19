@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Geolocation } from "@ionic-native/geolocation/ngx";
 import { HttpClient } from '@angular/common/http';
 import { Platform } from "@ionic/angular";
@@ -12,7 +12,7 @@ import { Network } from '@ionic-native/network/ngx';
   templateUrl: './mis-geolocalizaciones.page.html',
   styleUrls: ['./mis-geolocalizaciones.page.scss'],
 })
-export class MisGeolocalizacionesPage implements OnInit {
+export class MisGeolocalizacionesPage {
   map;
   loadPromise: Promise<void>;
   latitude;
@@ -21,8 +21,6 @@ export class MisGeolocalizacionesPage implements OnInit {
   pinClicked;
   isLoading = true;
   key;
-  ngOnInit() {
-  }
 
   constructor(private network: Network, private platform: Platform, public router: Router, public geolocation: Geolocation, public http: HttpClient) {
     // watch network for a disconnection
@@ -35,18 +33,13 @@ export class MisGeolocalizacionesPage implements OnInit {
       timeout: 60000,
       maximumAge: 30000
     };
-    //control de logeo
+
     try {
-      console.log('entro en logeo')
       this.key = JSON.parse(localStorage.getItem("key"));
-      console.log(this.key.success.id_user);
+      if (this.key == null) throw "";
     } catch (e) {
       this.router.navigateByUrl('/login');
     }
-    //fin control de logeo
-
-    console.log(this.key.success.id_user);
-    // fin control de logeo
 
     this.platform.ready().then(() => {
       this.load().then(() => {

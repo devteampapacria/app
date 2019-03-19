@@ -18,28 +18,10 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
 </head>
 
 <body>
   <app-root></app-root>
-  <script>
-    window.onload = function () {
-      grecaptcha.render('g-recaptcha', { 'sitekey': '6LdLzpYUAAAAAP6EWNqwovoN8xvNJm_6RWAqmbHN' })
-    }
-    function enableBtn(){
-        document.getElementById("submit_details").disabled = false;
-        getCaptcha();
-    }
-    
-    function disableButton() {
-        document.getElementById("submit_details").disabled = true;
-    }
-
-    function getCaptcha() {
-      document.getElementById("captchaRegister").value = grecaptcha.getResponse();
-    }
-  </script>
 </body>
 
 </html>

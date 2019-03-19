@@ -7,4 +7,133 @@
   border-radius: 50%;
   width: 80px;
   height: 80px;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto;
+}
+
+.homeLogo {
+  width: 10vw;
+  height: 20vh;
+  background-size: cover; 
+  background-position: center;
+  margin: 0 auto;
+}
+
+ion-slides img {
+  width: 40vw;
+  grid-area: imagen;
+  border-radius: 5px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+ion-tab-button:nth-child(1), ion-tab-button:nth-child(2) {
+  border-right: 0.5px solid #1F4821;
+}
+
+.userData {
+  width: 95%;
+  position: absolute !important; 
+  bottom: 56px !important;
+  background-color: ghostWhite;
+  margin: 10px;
+  margin-left: 2.5%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+ion-slide {
+  background-color: ghostWhite;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.sliderReplaceGrid {
+  display: none;
+}
+
+@media only screen and (orientation: landscape) {
+  .sliderGrid {
+    display: none;
+  }
+
+  .sliderReplaceGrid {
+    display: block;
+  }
+
+  .lailaFont {
+    font-size: 20px;
+  }
+
+  .userData ion-icon, .userData span {
+    font-size: 19px;
+  }  
+
+  .userAvatar {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-height: 369px) and (orientation: landscape) {
+  .homeLogo {
+    display: none;
+  }
+}
+
+@media (min-height: 370px) and (max-height: 439px) and (orientation: landscape) {
+  .homeLogo {
+    width: 18vw;
+    height: 26vh;
+  }
+}
+
+@media (min-height: 440px) and (max-height: 490px) and (orientation: landscape) {
+  .homeLogo {
+    width: 20vw;
+    height: 30vh;
+  }
+}
+
+@media (min-height: 491px) and (max-height: 640px) and (orientation: landscape) {
+  .homeLogo {
+    width: 30vw;
+    height: 40vh;
+  }
+}
+
+@media (min-height: 641px) and (max-height: 772px) and (orientation: landscape) {
+  .homeLogo {
+    width: 55vw;
+    height: 50vh;
+  }
+}
+
+@media (min-height: 773px) and (orientation: landscape) {
+  .homeLogo {
+    width: 44vw;
+    height: 62vh;
+  }
+}
+
+.homeInnerSlides {
+  display: grid;
+  grid-template-areas: 
+  "username geover"
+  "imagen imagen";
+}
+
+.geoVer {
+  text-decoration: none;
+  font-weight: bold;
+  grid-area: geover;
+  justify-self: center;
+  align-self:center;
+  font-size: 30px;
+}
+
+.userName {
+  justify-self: center;
+  grid-area: username;
 }

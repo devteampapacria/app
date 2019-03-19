@@ -6,27 +6,38 @@
         <ion-title>Noticias</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content padding>
+<ion-content>
 
     <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles"
             refreshingText="Refreshing...">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-item *ngFor="let noticia of noticias">
+    <ion-item class="noticiaItem" *ngFor="let noticia of noticias">
+        <!-- WIP -->
+        <a href="/home/noticia/{{noticia.id}}" class="noticiaWrapperLink">
+            <div class="noticiaWrapper">
+                <div class="noticiaThumbnail" [style.background-image]="'url(' + noticia.img + ')'"></div>
+                <div class="noticiaTitulo">
+                    <p>{{noticia.titulo.substring(0,44) + '...'}}</p>
+                </div>
+                <div class="noticiaDescripcion">
+                    <p>{{noticia.descripcion.substring(0,60) + '...'}}</p>
+                </div>
+                <div class="noticiaTimestamp">
+                    <p>
+                        {{noticia.created_at.split(" ")[0]}}
+                    </p>
+                </div>
+                <div class="noticiaVer">
+                    <a href="/home/noticia/{{noticia.id}}">
+                        <b>Ir a la noticia</b>
+                    </a>
+                </div>
 
-        <div class="col-xs-12 article-wrapper">
-            <article>
-                <div class="img-wrapper"><img [src]="noticia.img"></div>
-                <h1>{{noticia.titulo}}</h1>
-                <p>{{noticia.created_at.split(" ")[0]}}
-                    <br>
-                    <ion-button href="/home/noticia/{{noticia.id}}">
-                        ver
-                    </ion-button>
-                </p>
-            </article>
-        </div>
+            </div>
+        </a>
+        <!-- WIP -->
     </ion-item>
     <ion-infinite-scroll (ionInfinite)="loadData($event)">
         <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">

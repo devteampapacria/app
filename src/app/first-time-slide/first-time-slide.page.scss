@@ -3,3 +3,24 @@
     height: 100%;
 }
 
+.arrowAnimation {
+    font-size: 20px;
+    position: relative;
+    float: right;
+    animation-name: magicArrow;
+    animation-duration: 3.0s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes magicArrow {
+    0% {
+        left: -30px;
+    }
+
+    50% {
+        left: 15px;
+    }
+    100% {
+        left: -30px;
+    }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -11,7 +11,7 @@ import { Network } from '@ionic-native/network/ngx';
     templateUrl: './crear-geolocalizacion.page.html',
     styleUrls: ['./crear-geolocalizacion.page.scss'],
 })
-export class CrearGeolocalizacionPage implements OnInit {
+export class CrearGeolocalizacionPage {
     images = [null, null, null, null];
     BreakException = {};
     space = false;
@@ -35,18 +35,14 @@ export class CrearGeolocalizacionPage implements OnInit {
         this.platform.backButton.subscribe(() => {
             this.router.navigateByUrl('home');
         })
-        //control de logeo
+
         try {
-            console.log('entro en logeo')
             this.key = JSON.parse(localStorage.getItem("key"));
-            console.log(this.key.success.id_user);
+            if (this.key == null) throw "";
         } catch (e) {
             this.router.navigateByUrl('/login');
         }
-        //fin control de logeo
-
-        console.log(this.key.success.id_user);
-        // fin control de logeo
+ 
         this.platform.ready().then(() => {
             this.geolocation.getCurrentPosition(options).then((resp) => {
                 this.latitud = resp.coords.latitude;
@@ -63,10 +59,6 @@ export class CrearGeolocalizacionPage implements OnInit {
         });
 
     }
-
-    ngOnInit() { }
-
-
 
     takePicture() {
         this.isLoading = true;

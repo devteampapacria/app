@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar class="greenyToolbar">
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="key">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
@@ -10,52 +10,96 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+  <ion-grid class="sliderGrid" justify-content-center align-items-center style="height: 100%; flex-direction: column">
     <ion-row>
-      <ion-col text-center>
-        <h1 class="lailaFont">Nuestro proyecto</h1>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <img class="slide1img" src="./assets/papacria_logo_2019.png" alt="Logo Papacria">
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col text-center>
-        <h1 class="lailaFont">tu proyecto</h1>
-      </ion-col>
-    </ion-row>
-    <ion-row *ngIf="key" text-center>
       <ion-col>
-        <!-- User's icon -->
+        <h3 class="lailaFont" text-center>Fotos tomadas por nuestros usuarios</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        <ion-slides [options]="sliderOpts">
+          <ion-slide class="images" *ngFor="let image of images;let i = index">
+            <div class="homeInnerSlides">
+              <b><h5 class="lailaFont userName">{{image.user}}</h5></b>
+              <a class="geoVer" href="/geolocalizacion/{{image.geolocalizacion_id}}">
+                <ion-icon name="pin"></ion-icon>
+              </a>
+              <img [src]="image.resized_name" (load)="image.loaded = true" tappable (click)="openPreview(i,image.id)"
+                [hidden]="!image.loaded">
+            </div>
+            <ion-spinner [hidden]="image.loaded"></ion-spinner>
+          </ion-slide>
+        </ion-slides>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="sliderReplaceGrid lailaFont" text-center>
+    <ion-row>
+      <ion-col>
+        Nuestro Proyecto
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="homeLogo" [style.background-image]="'url(./assets/papacria_logo_2019.png)'"></div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Tu Proyecto
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid *ngIf="key" class="userData">
+    <ion-row text-center align-items-center>
+      <ion-col>
         <div class="userAvatar" [style.background-image]="'url(' + key.avatar + ')'">
         </div>
       </ion-col>
       <ion-col>
-        <h1><ion-icon name="trophy"></ion-icon>{{key.score}}</h1>
+        <h1>
+          <ion-icon name="trophy"></ion-icon>
+          <span>
+            {{key.score}}
+          </span>
+        </h1>
       </ion-col>
       <ion-col>
-        <h1><ion-icon name="photos"></ion-icon>{{key.numPhotos}}</h1>
+        <h1>
+          <ion-icon name="photos"></ion-icon>
+          <span>
+            {{key.numPhotos}}
+          </span>
+        </h1>
       </ion-col>
       <ion-col>
-        <h1><ion-icon name="pin"></ion-icon>{{key.validGeos}}</h1>
+        <h1>
+          <ion-icon name="pin"></ion-icon>
+          <span>
+            {{key.validGeos}}
+          </span>
+        </h1>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+
   <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="crear">
+    <ion-tab-bar slot="bottom" class="greenyToolbar">
+      <ion-tab-button tab="crear" class="greenyToolbar">
         <ion-icon name="add"></ion-icon>
         <ion-label>Crear punto</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="mapa">
+      <ion-tab-button tab="mapa" class="greenyToolbar">
         <ion-icon name="map"></ion-icon>
         <ion-label>Mapa</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="noticias">
+      <ion-tab-button tab="noticias" class="greenyToolbar">
         <ion-icon name="paper"></ion-icon>
         <ion-label>Noticias</ion-label>
       </ion-tab-button>
