@@ -14,33 +14,33 @@ import { Subscription } from 'rxjs';
     selector: 'app-root',
     templateUrl: 'app.component.html'
 })
-export class AppComponent implements OnInit{
-  public appPages = [
-    {
-      title: 'Inicio',
-      url: '/home',
-      icon: 'home'
-    },
-    {
-      title: 'Mis Geolocalizaciones',
-      url: '/mis-geolocalizaciones',
-      icon: 'pin'
-    },
-    {
-      title: 'Clasificación',
-      url: '/clasificacion',
-      icon: 'star-half'
-    }
-  ];
-  logged = this.islogged.check();
+export class AppComponent implements OnInit {
+    public appPages = [
+        {
+            title: 'Inicio',
+            url: '/home',
+            icon: 'home'
+        },
+        {
+            title: 'Mis Geolocalizaciones',
+            url: '/mis-geolocalizaciones',
+            icon: 'pin'
+        },
+        {
+            title: 'Clasificación',
+            url: '/clasificacion',
+            icon: 'star-half'
+        }
+    ];
+    logged = this.islogged.check();
 
     isLoggedSubscription: Subscription;
 
     ngOnInit() {
-      this.islogged.onLogginChange.subscribe(data => {
-        this.logged = data;
-      })
-     }
+        this.islogged.onLogginChange.subscribe(data => {
+            this.logged = data;
+        })
+    }
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
@@ -53,7 +53,8 @@ export class AppComponent implements OnInit{
     ) {
         this.initializeApp();
     }
-    
+
+
     initializeApp() {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
@@ -78,7 +79,7 @@ export class AppComponent implements OnInit{
     }
 
     cerrarSesion() {
-      this.sesion.presentAlertConfirm();
-      this.menu.close();
+        this.sesion.presentAlertConfirm();
+        this.menu.close();
     }
 }

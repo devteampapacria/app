@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy, Router } from '@angular/router';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Camera } from '@ionic-native/camera/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -13,33 +14,38 @@ import { AppRoutingModule } from './app-routing.module';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ImageModalPageModule } from './image-modal/image-modal.module';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { Network } from '@ionic-native/network/ngx';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        IonicModule.forRoot(),
-        AppRoutingModule,
-        ImageModalPageModule
-    ],
-    
     providers: [
         StatusBar,
         SplashScreen,
         Camera,
         HTTP,
         Geolocation,
+        Network,
         InAppBrowser,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         FCM,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
+    imports: [
+
+        BrowserModule,
+        HttpClientModule,
+        HttpModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        ImageModalPageModule
+    ],
+
+
     bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private router : Router) {
-    
-  }
+    constructor(private router: Router) {
+
+    }
 }
