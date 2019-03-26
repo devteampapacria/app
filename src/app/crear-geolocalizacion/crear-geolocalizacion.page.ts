@@ -42,7 +42,7 @@ export class CrearGeolocalizacionPage {
         } catch (e) {
             this.router.navigateByUrl('/login');
         }
- 
+
         this.platform.ready().then(() => {
             this.geolocation.getCurrentPosition(options).then((resp) => {
                 this.latitud = resp.coords.latitude;
@@ -107,8 +107,8 @@ export class CrearGeolocalizacionPage {
                 "descripcion": this.descriptArea,
                 "imagenes": this.images,
                 "recogido": 0,
-                "user_id": this.key.success.id_user,
-                "key": this.key.success.token
+                "user_id": this.key.id_user,
+                "key": this.key.token
             }
 
             this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/crearPunto", punto, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json' }) })
