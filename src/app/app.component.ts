@@ -30,6 +30,10 @@ export class AppComponent implements OnInit {
             title: 'Clasificación',
             url: '/clasificacion',
             icon: 'star-half'
+        }, {
+            title: 'ajustes',
+            url: '/home/ajustes',
+            icon: 'build'
         }
     ];
     logged = this.islogged.check();

@@ -97,30 +97,31 @@ export class CrearGeolocalizacionPage {
     }
 
     createGeolocation(descriptArea: string) {
-
-        if (this.images[0] != null) {
+        if (this.images[0] != null && descriptArea != undefined) {
             this.isLoading = true;
             let acceptedImages = [];
+
             let punto = {
                 "latitud": this.latitud,
                 "longitud": this.longitud,
-                "descripcion": this.descriptArea,
+                "descripcion": descriptArea,
                 "imagenes": this.images,
                 "recogido": 0,
                 "user_id": this.key.id_user,
                 "key": this.key.token
             }
 
+
             this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/crearPunto", punto, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json' }) })
                 .subscribe(data => {
                     this.isLoading = false;
                     this.router.navigateByUrl('/geolocalizacion-creada');
                 }, error => {
-                    alert('error');
+                    alert('Hay un problema con el servidor');
                     this.isLoading = false;
                 });
         } else {
-            alert('No has sacado ninguna foto');
+            alert('No has sacado ninguna foto o no has puesto una descripción, ambos son obligatorios');
         }
     }
 }
