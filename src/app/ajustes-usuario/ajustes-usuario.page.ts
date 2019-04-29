@@ -19,28 +19,4 @@ export class AjustesUsuarioPage implements OnInit {
     ajustes = ["name", "email"];
     ngOnInit() {
     }
-    onSubmit(f: NgForm) {
-        console.log(f.value);  // { first: '', last: '' }
-        console.log(f.valid);  // false
-
-        // this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/register", f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
-        //     .subscribe(data => {
-        //         localStorage.setItem("key", JSON.stringify(data));
-
-        //     }, error => {
-
-        //         this.presentToast();
-        //     });
-
-    }
-    async presentToast() {
-        const toast = await this.toastController.create({
-            message: "mensaje",
-            duration: 2000,
-            showCloseButton: true,
-            closeButtonText: 'X',
-            color: "primary",
-        });
-        toast.present();
-    }
 }

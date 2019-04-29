@@ -30,9 +30,9 @@ export class AjustesServicioPage implements OnInit {
         console.log(f.valid);  // false
         try {
             this.key = JSON.parse(localStorage.getItem("key"));
-            console.log(this.key.success.id_user);
-            f.value["id"] = this.key.success.id_user;
-            f.value["token"] = this.key.success.token;
+            console.log(this.key.id_user);
+            f.value["id"] = this.key.id_user;
+            f.value["token"] = this.key.token;
         } catch (e) {
             this.router.navigateByUrl('/login');
         }
