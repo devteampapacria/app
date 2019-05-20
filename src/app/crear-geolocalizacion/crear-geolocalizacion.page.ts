@@ -112,7 +112,7 @@ export class CrearGeolocalizacionPage {
             }
 
 
-            this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/crearPunto", punto, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json' }) })
+            this.http.post("https://papacria.org/api/crearPunto", punto, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json' }) })
                 .subscribe(data => {
                     this.isLoading = false;
                     this.router.navigateByUrl('/geolocalizacion-creada');

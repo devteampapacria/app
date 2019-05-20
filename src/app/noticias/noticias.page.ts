@@ -34,7 +34,7 @@ export class NoticiasPage {
     //cuando se llame al evento de loadData
     loadData(event) {
         setTimeout(() => {
-            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?page=' + this.i).subscribe((response) => {
+            this.http.get('https://papacria.org/api/noticias?page=' + this.i).subscribe((response) => {
                 this.todas = response;
                 if (this.todas.data == []) {
                     event.target.complete();
@@ -55,7 +55,7 @@ export class NoticiasPage {
         setTimeout(() => {
             this.noticias = new Array;
             this.i = 1;
-            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticias?page=' + this.i).subscribe((response) => {
+            this.http.get('https://papacria.org/api/noticias?page=' + this.i).subscribe((response) => {
                 this.todas = response;
                 //por defecto ponemos el limite de noticias
                 this.todas.data.forEach(element => {

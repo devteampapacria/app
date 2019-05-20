@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Network } from '@ionic-native/network/ngx';
 import { ToastController } from '@ionic/angular';
 import { Platform } from "@ionic/angular";
-import { RecaptchaComponent} from 'ng-recaptcha';
+import { RecaptchaComponent } from 'ng-recaptcha';
 
 @Component({
     selector: 'app-register',
@@ -13,7 +13,7 @@ import { RecaptchaComponent} from 'ng-recaptcha';
     styleUrls: ['./register.page.scss']
 })
 
-export class RegisterPage implements OnInit{
+export class RegisterPage implements OnInit {
     grecaptcha;
     captchaPassed: boolean = false;
     captchaResponse: string;
@@ -35,7 +35,7 @@ export class RegisterPage implements OnInit{
     form;
     onSubmit(f: NgForm) {
         this.form = f;
-        this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/register", f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
+        this.http.post("https://papacria.org/api/register", f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
             .subscribe(data => {
                 localStorage.setItem("key", JSON.stringify(data['success']));
                 this.router.navigateByUrl('/home');
@@ -47,7 +47,7 @@ export class RegisterPage implements OnInit{
 
     captchaResolved(response: string): void {
         if (response != null) {
-            
+
             this.zone.run(() => {
                 this.captchaPassed = true;
                 this.captchaResponse = response;
@@ -78,7 +78,7 @@ export class RegisterPage implements OnInit{
                 mensaje = e.error.error['g_recaptcha_response'];
                 break;
             default:
-            
+
         }
         this.grecaptcha.reset();
         const toast = await this.toastController.create({

@@ -37,7 +37,7 @@ export class AjustesServicioPage implements OnInit {
             this.router.navigateByUrl('/login');
         }
 
-        this.http.post("https://papacria-dev-space-danielbueno.c9users.io/api/" + this.servicio, f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
+        this.http.post("https://papacria.org/api/" + this.servicio, f.value, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json', }) })
             .subscribe(data => {
                 this.presentToast("Tu " + this.servicio + " ha sido modificado correctamente");
 

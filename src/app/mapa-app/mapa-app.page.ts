@@ -45,7 +45,7 @@ export class MapaAppPage {
                             resp.coords.latitude,
                             resp.coords.longitude
                         ),
-                        zoom: 6,
+                        zoom: 9,
                     });
                     this.addPoints();
                     this.changeView();
@@ -74,7 +74,7 @@ export class MapaAppPage {
     }
 
     addPoints() {
-        this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/puntos').subscribe((response) => {
+        this.http.get('https://papacria.org/api/puntos').subscribe((response) => {
             this.puntos = response;
             for (let i = 0; i < this.puntos.length; i++) {
                 let pin = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(response[i].latitud, response[i].longitud), {

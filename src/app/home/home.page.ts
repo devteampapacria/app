@@ -71,7 +71,7 @@ export class HomePage {
     }
 
     getUserData() {
-        this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/userData/' + this.key.id_user).subscribe((response) => {
+        this.http.get('https://papacria.org/api/userData/' + this.key.id_user).subscribe((response) => {
             this.key.name = response['name'];
             this.key.validGeos = response['validGeos'];
             this.key.score = response['score'];
@@ -83,7 +83,7 @@ export class HomePage {
 
     getImgs() {
         this.isLoading = true;
-        this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/randomGeoImages').subscribe((response) => {
+        this.http.get('https://papacria.org/api/randomGeoImages').subscribe((response) => {
             this.images = response;
             for (let i = 0; i < this.images.length; i++) {
                 this.images[i].loaded = false;

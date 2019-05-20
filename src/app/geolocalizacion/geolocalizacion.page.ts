@@ -29,16 +29,16 @@ export class GeolocalizacionPage implements OnInit {
         spaceBetween: 20,
         centeredSlides: true
     };
-  constructor(private router: Router, private network: Network, private modalController: ModalController, private route: ActivatedRoute, public http: HttpClient, private platform: Platform) {
-    // watch network for a disconnection
-    this.network.onDisconnect().subscribe(() => {
-      this.router.navigateByUrl('/network-error');
-    });
+    constructor(private router: Router, private network: Network, private modalController: ModalController, private route: ActivatedRoute, public http: HttpClient, private platform: Platform) {
+        // watch network for a disconnection
+        this.network.onDisconnect().subscribe(() => {
+            this.router.navigateByUrl('/network-error');
+        });
 
-    this.platform.backButton.subscribe(() => {
-        this.router.navigateByUrl('home');
-    });
-  }
+        this.platform.backButton.subscribe(() => {
+            this.router.navigateByUrl('home');
+        });
+    }
 
     ngOnInit() {
         this.id = this.route.snapshot.paramMap.get('id');
@@ -59,7 +59,7 @@ export class GeolocalizacionPage implements OnInit {
 
     getInfo() {
         this.isLoading = true;
-        this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/infoPunto/' + this.id).subscribe((response) => {
+        this.http.get('https://papacria.org/api/infoPunto/' + this.id).subscribe((response) => {
             let datos = Object(response);
             this.latitud = datos.latitud;
             this.longitud = datos.longitud;
@@ -72,7 +72,7 @@ export class GeolocalizacionPage implements OnInit {
     }
 
     getImgs() {
-        this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/imgPunto/' + this.id).subscribe((response) => {
+        this.http.get('https://papacria.org/api/imgPunto/' + this.id).subscribe((response) => {
             this.images = response;
             for (let i = 0; i < this.images.length; i++) {
                 this.images[i].loaded = false;

@@ -50,7 +50,7 @@ export class MisGeolocalizacionesPage {
                             resp.coords.latitude,
                             resp.coords.longitude
                         ),
-                        zoom: 6,
+                        zoom: 9,
                     });
                     this.addPoints();
                     this.changeView();
@@ -80,7 +80,7 @@ export class MisGeolocalizacionesPage {
 
     addPoints() {
 
-        this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/misGeolocalizacionesAPI/' + this.key.id_user).subscribe((response) => {
+        this.http.get('https://papacria.org/api/misGeolocalizacionesAPI/' + this.key.id_user).subscribe((response) => {
             this.puntos = response;
             console.log(this.puntos);
             for (let i = 0; i < this.puntos.length; i++) {

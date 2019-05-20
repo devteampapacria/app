@@ -39,7 +39,7 @@ export class ClasificacionPage {
     }
 
     getRankings() {
-        this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/allRankings').subscribe((response) => {
+        this.http.get('https://papacria.org/api/allRankings').subscribe((response) => {
             this.allRankings = response;
 
             let index = this.allRankings.findIndex(x => x.id == this.key.id_user);
@@ -56,7 +56,7 @@ export class ClasificacionPage {
     //cuando se llame al evento de loadData
     loadData(event) {
         setTimeout(() => {
-            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/rankings?page=' + this.i).subscribe((response) => {
+            this.http.get('https://papacria.org/api/rankings?page=' + this.i).subscribe((response) => {
                 this.todas = response;
                 if (this.todas.data == []) {
                     event.target.complete();
@@ -77,7 +77,7 @@ export class ClasificacionPage {
         setTimeout(() => {
             this.rankings = new Array;
             this.i = 1;
-            this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/rankings?page=' + this.i).subscribe((response) => {
+            this.http.get('https://papacria.org/api/rankings?page=' + this.i).subscribe((response) => {
                 this.todas = response;
                 //por defecto ponemos el limite de noticias
                 this.todas.data.forEach(element => {

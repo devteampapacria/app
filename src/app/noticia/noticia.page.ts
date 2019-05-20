@@ -14,7 +14,7 @@ export class NoticiaPage {
     private id;
     private noticia;
     private contenido: string = "";
-        
+
     constructor(private network: Network, private router: Router, private route: ActivatedRoute, private http: HttpClient, private platform: Platform) {
         this.platform.backButton.subscribe(() => {
             this.router.navigateByUrl('home/noticias');
@@ -26,7 +26,7 @@ export class NoticiaPage {
         });
 
         this.id = this.route.snapshot.paramMap.get('noticia_id');
-        this.http.get('https://papacria-dev-space-danielbueno.c9users.io/api/noticia/' + this.id).subscribe((response) => {
+        this.http.get('https://papacria.org/api/noticia/' + this.id).subscribe((response) => {
             this.noticia = response;
             this.contenido = this.noticia.contenido;
         })
