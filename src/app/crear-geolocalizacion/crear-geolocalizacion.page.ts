@@ -110,8 +110,6 @@ export class CrearGeolocalizacionPage {
                 "user_id": this.key.id_user,
                 "key": this.key.token
             }
-
-
             this.http.post("https://papacria.org/api/crearPunto", punto, { headers: new HttpHeaders({ 'Content-Type': 'application/json', "Accept": 'application/json' }) })
                 .subscribe(data => {
                     this.isLoading = false;

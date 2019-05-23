@@ -86,6 +86,10 @@ export class AppComponent implements OnInit {
         window.open("https://papacria.org", '_system', 'location=yes');
     }
 
+    Agradecimientos() {
+        window.open("https://papacria.org/agradecimientos", '_system', 'location=yes');
+    }
+
     cerrarSesion() {
         this.sesion.presentAlertConfirm();
         this.menu.close();
